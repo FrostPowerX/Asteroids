@@ -18,6 +18,31 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\entities\Ball.cpp" />
+    <ClCompile Include="src\entities\PowerUp.cpp" />
+    <ClCompile Include="src\GameLoop.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\scenes\SceneCredits.cpp" />
+    <ClCompile Include="src\scenes\SceneMenu.cpp" />
+    <ClCompile Include="src\ui\Button.cpp" />
+    <ClCompile Include="src\ui\Panel.cpp" />
+    <ClCompile Include="src\ui\Text.cpp" />
+    <ClCompile Include="src\utilities\Utils.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\entities\Ball.h" />
+    <ClInclude Include="src\entities\PowerUP.h" />
+    <ClInclude Include="src\GameLoop.h" />
+    <ClInclude Include="src\scenes\SceneCredits.h" />
+    <ClInclude Include="src\scenes\SceneMenu.h" />
+    <ClInclude Include="src\ui\Button.h" />
+    <ClInclude Include="src\ui\Panel.h" />
+    <ClInclude Include="src\ui\Text.h" />
+    <ClInclude Include="src\utilities\Circle.h" />
+    <ClInclude Include="src\utilities\Constants.h" />
+    <ClInclude Include="src\utilities\Utils.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -148,9 +173,6 @@
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="main.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

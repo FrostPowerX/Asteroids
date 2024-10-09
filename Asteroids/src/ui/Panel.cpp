@@ -66,5 +66,5 @@ void DrawPanel(Panel panel)
 {
     DrawRectangleRec(panel.rect, panel.rectColor);
 
-    DrawText(panel.text.c_str(), panel.textPosition.x, panel.textPosition.y, panel.fontSizeText, panel.textColor);
+    DrawText(panel.text.c_str(), static_cast<int>(panel.textPosition.x), static_cast<int>(panel.textPosition.y), panel.fontSizeText, panel.textColor);
 }

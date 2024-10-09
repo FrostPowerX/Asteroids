@@ -77,14 +77,13 @@ void ChangeBallSpeed(Ball& ball, float speed)
 	ball.speed = speed;
 }
 
-void DrawBall(Ball& ball)
+void DrawBall(Ball& ball, int screenWidth, int screenHeight)
 {
 	Vector3 pos;
 	pos.x = ball.cir.x - screenWidth / 2;
 	pos.y = 10;
 	pos.z = ball.cir.y - screenHeight / 2;
 
-	//DrawCircle(int(ball.cir.x), int(ball.cir.y), ball.cir.radius, ball.color);
 	DrawSphere(pos, ball.cir.radius, ball.color);
 	DrawSphereWires(pos, ball.cir.radius, 3, 2, ball.colorBorder);
 }

@@ -34,6 +34,6 @@ void ChangeRadiusBall(Ball&, float);
 
 void ChangeBallSpeed(Ball&, float);
 
-void DrawBall(Ball&);
+void DrawBall(Ball&, int screenWidth, int screenHeight);
 
 #endif // !BALL

@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SpriteManager.cpp" />
     <ClCompile Include="src\entities\Ball.cpp" />
     <ClCompile Include="src\entities\PowerUp.cpp" />
     <ClCompile Include="src\GameLoop.cpp" />
@@ -32,17 +31,16 @@
     <ClCompile Include="src\utilities\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SpriteManager.h" />
     <ClInclude Include="src\entities\Ball.h" />
     <ClInclude Include="src\entities\PowerUP.h" />
     <ClInclude Include="src\GameLoop.h" />
+    <ClInclude Include="src\managers\SpriteManager.h" />
     <ClInclude Include="src\scenes\SceneCredits.h" />
     <ClInclude Include="src\scenes\SceneMenu.h" />
     <ClInclude Include="src\ui\Button.h" />
     <ClInclude Include="src\ui\Panel.h" />
     <ClInclude Include="src\ui\Text.h" />
     <ClInclude Include="src\utilities\Circle.h" />
-    <ClInclude Include="src\utilities\Constants.h" />
     <ClInclude Include="src\utilities\Utils.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -102,6 +100,10 @@
     <IntDir>$(SolutionDir)obj\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)bin\</OutDir>
+    <IntDir>$(SolutionDir)obj\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)bin\</OutDir>
     <IntDir>$(SolutionDir)obj\</IntDir>
   </PropertyGroup>

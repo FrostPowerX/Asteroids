@@ -27,9 +27,6 @@
     <ClCompile Include="src\scenes\SceneCredits.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteManager.cpp">
-      <Filter>Managers</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameLoop.h" />
@@ -48,9 +45,6 @@
     <ClInclude Include="src\utilities\Circle.h">
       <Filter>Utilities</Filter>
     </ClInclude>
-    <ClInclude Include="src\utilities\Constants.h">
-      <Filter>Utilities</Filter>
-    </ClInclude>
     <ClInclude Include="src\entities\Ball.h">
       <Filter>Entities</Filter>
     </ClInclude>
@@ -63,7 +57,7 @@
     <ClInclude Include="src\scenes\SceneCredits.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteManager.h">
+    <ClInclude Include="src\managers\SpriteManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
   </ItemGroup>

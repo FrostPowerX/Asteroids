@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SpriteManager.cpp" />
     <ClCompile Include="src\entities\Ball.cpp" />
     <ClCompile Include="src\entities\PowerUp.cpp" />
     <ClCompile Include="src\GameLoop.cpp" />
@@ -31,6 +32,7 @@
     <ClCompile Include="src\utilities\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SpriteManager.h" />
     <ClInclude Include="src\entities\Ball.h" />
     <ClInclude Include="src\entities\PowerUP.h" />
     <ClInclude Include="src\GameLoop.h" />

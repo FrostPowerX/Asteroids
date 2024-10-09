@@ -4,22 +4,22 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\GameLoop.cpp" />
     <ClCompile Include="src\ui\Button.cpp">
-      <Filter>ui</Filter>
+      <Filter>Ui</Filter>
     </ClCompile>
     <ClCompile Include="src\ui\Panel.cpp">
-      <Filter>ui</Filter>
+      <Filter>Ui</Filter>
     </ClCompile>
     <ClCompile Include="src\ui\Text.cpp">
-      <Filter>ui</Filter>
+      <Filter>Ui</Filter>
     </ClCompile>
     <ClCompile Include="src\utilities\Utils.cpp">
-      <Filter>utilities</Filter>
+      <Filter>Utilities</Filter>
     </ClCompile>
     <ClCompile Include="src\entities\Ball.cpp">
-      <Filter>entities</Filter>
+      <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="src\entities\PowerUp.cpp">
-      <Filter>entities</Filter>
+      <Filter>Entities</Filter>
     </ClCompile>
     <ClCompile Include="src\scenes\SceneMenu.cpp">
       <Filter>Scenes</Filter>
@@ -27,32 +27,35 @@
     <ClCompile Include="src\scenes\SceneCredits.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="SpriteManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameLoop.h" />
     <ClInclude Include="src\ui\Button.h">
-      <Filter>ui</Filter>
+      <Filter>Ui</Filter>
     </ClInclude>
     <ClInclude Include="src\ui\Panel.h">
-      <Filter>ui</Filter>
+      <Filter>Ui</Filter>
     </ClInclude>
     <ClInclude Include="src\ui\Text.h">
-      <Filter>ui</Filter>
+      <Filter>Ui</Filter>
     </ClInclude>
     <ClInclude Include="src\utilities\Utils.h">
-      <Filter>utilities</Filter>
+      <Filter>Utilities</Filter>
     </ClInclude>
     <ClInclude Include="src\utilities\Circle.h">
-      <Filter>utilities</Filter>
+      <Filter>Utilities</Filter>
     </ClInclude>
     <ClInclude Include="src\utilities\Constants.h">
-      <Filter>utilities</Filter>
+      <Filter>Utilities</Filter>
     </ClInclude>
     <ClInclude Include="src\entities\Ball.h">
-      <Filter>entities</Filter>
+      <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="src\entities\PowerUP.h">
-      <Filter>entities</Filter>
+      <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="src\scenes\SceneMenu.h">
       <Filter>Scenes</Filter>
@@ -60,19 +63,25 @@
     <ClInclude Include="src\scenes\SceneCredits.h">
       <Filter>Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="SpriteManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scenes">
       <UniqueIdentifier>{44ab4832-7097-4a3e-aa5a-dc3e696979ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="utilities">
-      <UniqueIdentifier>{2aed718e-1654-4abd-9b17-c33606d1f927}</UniqueIdentifier>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{87408878-6bc5-4d49-940e-b1b023d32e84}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ui">
+    <Filter Include="Entities">
+      <UniqueIdentifier>{0b474d87-7dff-42da-ac40-1f758ebb3968}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ui">
       <UniqueIdentifier>{356e8d26-88e3-49f2-8568-89c1e5482e9e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="entities">
-      <UniqueIdentifier>{0b474d87-7dff-42da-ac40-1f758ebb3968}</UniqueIdentifier>
+    <Filter Include="Utilities">
+      <UniqueIdentifier>{2aed718e-1654-4abd-9b17-c33606d1f927}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -17,7 +17,7 @@ PowerUp CreatePowerUp(Rectangle rect, Color rectColor, float heightPlus, float s
 	return newPowerUp;
 }
 
-void DrawPowerUp(PowerUp& pUp)
+void DrawPowerUp(PowerUp& pUp, int screenWidth, int screenHeight)
 {
 	Vector3 pos;
 	pos.x = pUp.rect.x + (pUp.rect.width / 2) - (screenWidth / 2);
@@ -25,6 +25,4 @@ void DrawPowerUp(PowerUp& pUp)
 	pos.z = pUp.rect.y + (pUp.rect.height / 2) - (screenHeight / 2);
 
 	DrawCube(pos, pUp.rect.width, 15, pUp.rect.height, pUp.rectColor);
-	//DrawCubeWires(pos, pUp.rect.width, 15, pUp.rect.height, BLUE);
-	//DrawRectangleRec(pUp.rect, pUp.rectColor);
 }

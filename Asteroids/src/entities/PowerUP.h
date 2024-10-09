@@ -20,6 +20,6 @@ struct PowerUp
 
 PowerUp CreatePowerUp(Rectangle rect, Color rectColor, float heightPlus, float speedPlus, int ballsPlus);
 
-void DrawPowerUp(PowerUp& pUp);
+void DrawPowerUp(PowerUp& pUp, int screenWidth, int screenHeight);
 
 #endif // !POWER_UP

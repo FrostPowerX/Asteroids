@@ -1,6 +1,6 @@
 #include "Text.h"
 
-Text CreateText(std::string text, int x, int y, int font, Color color)
+Text CreateText(std::string text, float x, float y, int font, Color color)
 {
     Text newText;
 
@@ -18,5 +18,5 @@ Text CreateText(std::string text, int x, int y, int font, Color color)
 
 void DrawText(Text text)
 {
-    DrawText(text.text.c_str(),text.position.x, text.position.y, text.font, text.color);
+    DrawText(text.text.c_str(), static_cast<int>(text.position.x), static_cast<int>(text.position.y), text.font, text.color);
 }

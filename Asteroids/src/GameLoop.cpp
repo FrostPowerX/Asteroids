@@ -2,8 +2,10 @@
 
 #include "raylib.h"
 
-#include "scenes/SceneMenu.h"
+#include "scenes/SceneGamePlay.h"
+#include "scenes/SceneControlls.h"
 #include "scenes/SceneCredits.h"
+#include "scenes/SceneMenu.h"
 
 namespace game
 {
@@ -42,8 +44,10 @@ namespace game
 		InitWindow(ScreenWidth, ScreenHeight, GameName.c_str());
 		SetExitKey(KEY_NULL);
 
-		scenes::menu::Init();
+		game::scenes::gameplay::Init();
+		scenes::controlls::Init();
 		scenes::credits::Init();
+		scenes::menu::Init();
 	}
 
 	void Input()
@@ -51,9 +55,11 @@ namespace game
 		switch (currentScene)
 		{
 		case game::SCENE::GAMEPLAY:
+			game::scenes::gameplay::Input();
 			break;
 
 		case game::SCENE::CONTROLLS:
+			game::scenes::controlls::Input();
 			break;
 
 		case game::SCENE::CREDITS:
@@ -71,9 +77,11 @@ namespace game
 		switch (currentScene)
 		{
 		case game::SCENE::GAMEPLAY:
+			game::scenes::gameplay::Update();
 			break;
 
 		case game::SCENE::CONTROLLS:
+			game::scenes::controlls::Update();
 			break;
 
 		case game::SCENE::CREDITS:
@@ -99,9 +107,11 @@ namespace game
 		switch (currentScene)
 		{
 		case game::SCENE::GAMEPLAY:
+			game::scenes::gameplay::Draw();
 			break;
 
 		case game::SCENE::CONTROLLS:
+			game::scenes::controlls::Draw();
 			break;
 
 		case game::SCENE::CREDITS:

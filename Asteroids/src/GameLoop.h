@@ -6,10 +6,11 @@ namespace game
 {
 	enum class SCENE
 	{
-		MENU,
-		CREDITS,
 		GAMEPLAY,
-		CONTROLS
+		CONTROLLS,
+		CREDITS,
+		EXIT,
+		MENU,
 	};
 
 	extern const int ScreenWidth;

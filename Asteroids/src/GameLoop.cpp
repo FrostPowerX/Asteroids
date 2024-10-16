@@ -7,11 +7,13 @@
 
 namespace game
 {
-	const int ScreenWidth = 1024;
-	const int ScreenHeight = 768;
+	const int ScreenWidth = 800;
+	const int ScreenHeight = 600;
 	const std::string GameName = "Asteroids";
 
 	SCENE currentScene = SCENE::MENU;
+
+	bool programLoop = true;
 
 	void Init();
 
@@ -25,7 +27,7 @@ namespace game
 	{
 		Init();
 
-		while (!WindowShouldClose())
+		while (!WindowShouldClose() && programLoop)
 		{
 			Input();
 			Update();
@@ -48,21 +50,18 @@ namespace game
 	{
 		switch (currentScene)
 		{
-		case game::SCENE::MENU:
-			scenes::menu::Input();
+		case game::SCENE::GAMEPLAY:
+			break;
+
+		case game::SCENE::CONTROLLS:
 			break;
 
 		case game::SCENE::CREDITS:
 			scenes::credits::Input();
 			break;
 
-		case game::SCENE::GAMEPLAY:
-			break;
-
-		case game::SCENE::CONTROLS:
-			break;
-
-		default:
+		case game::SCENE::MENU:
+			scenes::menu::Input();
 			break;
 		}
 	}
@@ -71,21 +70,22 @@ namespace game
 	{
 		switch (currentScene)
 		{
-		case game::SCENE::MENU:
-			scenes::menu::Update();
+		case game::SCENE::GAMEPLAY:
+			break;
+
+		case game::SCENE::CONTROLLS:
 			break;
 
 		case game::SCENE::CREDITS:
 			scenes::credits::Update();
 			break;
 
-		case game::SCENE::GAMEPLAY:
+		case game::SCENE::MENU:
+			scenes::menu::Update();
 			break;
 
-		case game::SCENE::CONTROLS:
-			break;
-
-		default:
+		case game::SCENE::EXIT:
+			programLoop = false;
 			break;
 		}
 	}
@@ -98,21 +98,18 @@ namespace game
 
 		switch (currentScene)
 		{
-		case game::SCENE::MENU:
-			scenes::menu::Draw();
+		case game::SCENE::GAMEPLAY:
+			break;
+
+		case game::SCENE::CONTROLLS:
 			break;
 
 		case game::SCENE::CREDITS:
 			scenes::credits::Draw();
 			break;
 
-		case game::SCENE::GAMEPLAY:
-			break;
-
-		case game::SCENE::CONTROLS:
-			break;
-
-		default:
+		case game::SCENE::MENU:
+			scenes::menu::Draw();
 			break;
 		}
 

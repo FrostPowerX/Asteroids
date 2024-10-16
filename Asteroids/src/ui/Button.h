@@ -7,6 +7,7 @@
 
 const float ButtonWidth = 120;
 const float ButtonHeight = 40;
+const int ButtonFont = 10;
 
 struct Button
 {
@@ -29,8 +30,8 @@ struct Button
 	bool isMouseOnTop;
 };
 
-Button CreateButton(Vector2 position, float width, float height, std::string text, int fontSize, Color textColor, Color normal, Color onTop, Color pressed);
-Button CreateButton(float x, float y, float width, float height, std::string text, int fontSize, Color textColor, Color normal, Color onTop, Color pressed);
+Button CreateButton(std::string text, Vector2 position, float width = ButtonWidth, float height = ButtonHeight, int fontSize = ButtonFont, Color textColor = BLACK, Color normal = WHITE, Color onTop = GRAY, Color pressed = DARKGRAY);
+Button CreateButton(std::string text, float x, float y, float width = ButtonWidth, float height = ButtonHeight, int fontSize = ButtonFont, Color textColor = BLACK, Color normal = WHITE, Color onTop = GRAY, Color pressed = DARKGRAY);
 
 Vector2 GetCenterPositionButton(Button);
 

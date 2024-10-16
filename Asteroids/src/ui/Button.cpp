@@ -1,6 +1,6 @@
 #include "Button.h"
 
-Button CreateButton(Vector2 position, float width, float height, std::string text, int fontSize, Color textColor, Color normal, Color onTop, Color pressed)
+Button CreateButton(std::string text, Vector2 position, float width, float height, int fontSize, Color textColor, Color normal, Color onTop, Color pressed)
 {
 	Button newB;
 
@@ -22,7 +22,7 @@ Button CreateButton(Vector2 position, float width, float height, std::string tex
 	return newB;
 }
 
-Button CreateButton(float x, float y, float width, float height, std::string text, int fontSize, Color textColor, Color normal, Color onTop, Color pressed)
+Button CreateButton(std::string text, float x, float y, float width, float height, int fontSize, Color textColor, Color normal, Color onTop, Color pressed)
 {
 	Button newB;
 

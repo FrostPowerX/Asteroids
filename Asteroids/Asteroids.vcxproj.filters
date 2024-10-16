@@ -33,7 +33,9 @@
     <ClCompile Include="src\managers\SpriteManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="src\scenes\SceneGamePlay.cpp" />
+    <ClCompile Include="src\scenes\SceneGamePlay.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameLoop.h" />

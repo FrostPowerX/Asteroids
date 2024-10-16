@@ -26,10 +26,9 @@ Button CreateButton(float x, float y, float width, float height, std::string tex
 {
 	Button newB;
 
-	newB.rect.x = x;
-	newB.rect.y = y;
 	newB.rect.width = width;
 	newB.rect.height = height;
+	SetButtonPosition(newB, Vector2{ x,y });
 
 	newB.text = text;
 	newB.fontSize = fontSize;
@@ -101,7 +100,7 @@ bool IsButtonPressed(Button& button)
 		else
 			button.isPressed = false;
 
-		
+
 	}
 	else
 		button.isPressed = false;

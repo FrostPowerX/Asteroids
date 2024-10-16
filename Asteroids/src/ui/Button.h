@@ -5,6 +5,9 @@
 
 #include "raylib.h"
 
+const float ButtonWidth = 120;
+const float ButtonHeight = 40;
+
 struct Button
 {
 	Rectangle rect;

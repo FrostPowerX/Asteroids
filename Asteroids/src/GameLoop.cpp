@@ -7,6 +7,8 @@
 #include "scenes/SceneCredits.h"
 #include "scenes/SceneMenu.h"
 
+#include "managers/SpriteManager.h"
+
 namespace game
 {
 	const int ScreenWidth = 800;
@@ -128,6 +130,7 @@ namespace game
 
 	void DeInit()
 	{
+		spritemanager::UnloadSprites();
 		CloseWindow();
 	}
 }

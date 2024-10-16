@@ -14,17 +14,36 @@ namespace game
 			const int maxButtons = 4;
 
 			Button buttons[maxButtons];
+			std::string bNames[maxButtons];
+
+			float offset = ButtonHeight * 2;
+			float posx = ScreenWidth / 2;
+			float posy = offset;
+
 
 			void Init()
 			{
-				//example = CreateButton(0, 0, 50, 25, "Credits", 10, RED, WHITE, PURPLE, YELLOW);
+				bNames[0] = "Play";
+				bNames[1] = "Controlls";
+				bNames[2] = "Credits";
+				bNames[3] = "Exit";
+
+				for (int i = 0; i < maxButtons; i++)
+				{
+					buttons[i] = CreateButton(posx, posy, ButtonWidth, ButtonHeight, bNames[i], 10, RED, WHITE, PURPLE, YELLOW);
+					
+					posy += offset;
+				}
 			}
 
 			void Input()
 			{
-				MouseOnTopButton(buttons[0]);
-				if (IsButtonPressed(buttons[0]))
-					currentScene = SCENE::CREDITS;
+				for (int i = 0; i < maxButtons; i++)
+				{
+					MouseOnTopButton(buttons[i]);
+					if (IsButtonPressed(buttons[i]))
+						currentScene = SCENE(i);
+				}
 			}
 
 			void Update()

@@ -15,9 +15,10 @@ namespace game
 			std::string name;
 		};
 
-
 		void AddSprite(std::string name, std::string path);
 
 		Sprite GetSprite(std::string name);
+
+		void UnloadSprites();
 	}
 }

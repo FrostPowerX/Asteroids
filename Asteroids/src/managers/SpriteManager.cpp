@@ -4,13 +4,13 @@ namespace game
 {
 	namespace spritemanager
 	{
-		std::vector<Sprite> sprites;
+		std::vector<Sprite*> sprites;
 
 		void AddSprite(std::string name, std::string path)
 		{
-			Sprite newSp;
-			newSp.name = name;
-			newSp.texture = LoadTexture(path.c_str());
+			Sprite* newSp = new Sprite();
+			newSp->name = name;
+			newSp->texture = LoadTexture(path.c_str());
 
 			sprites.push_back(newSp);
 		}
@@ -22,10 +22,24 @@ namespace game
 
 			for (int i = 0; i < sprites.size(); i++)
 			{
-				if(name == sprites[i].name)
-					return sprites[i];
+				if(name == sprites[i]->name)
+					return *sprites[i];
 			}
 
+		}
+		void UnloadSprites()
+		{
+			int size = sprites.size();
+
+			for (int i = 0; i < size; i++)
+			{
+				UnloadTexture(sprites[i]->texture);
+			}
+
+			for (int i = 0; i < size; i++)
+			{
+				delete sprites[i];
+			}
 		}
 	}
 }

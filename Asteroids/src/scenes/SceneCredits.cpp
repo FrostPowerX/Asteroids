@@ -15,7 +15,7 @@ namespace game
 
 			void Init()
 			{
-				example = CreateButton(0, 0, 50, 25, "Menu", 10, RED, WHITE, PURPLE, YELLOW);
+				example = CreateButton("Menu", 0, 0);
 			}
 
 			void Input()

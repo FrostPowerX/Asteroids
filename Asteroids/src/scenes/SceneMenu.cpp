@@ -30,7 +30,7 @@ namespace game
 
 				for (int i = 0; i < maxButtons; i++)
 				{
-					buttons[i] = CreateButton(posx, posy, ButtonWidth, ButtonHeight, bNames[i], 10, RED, WHITE, PURPLE, YELLOW);
+					buttons[i] = CreateButton(bNames[i], posx, posy);
 					
 					posy += offset;
 				}

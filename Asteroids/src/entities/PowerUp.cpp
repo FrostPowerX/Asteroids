@@ -1,5 +1,4 @@
 #include "PowerUP.h"
-#include "..\utilities\Constants.h"
 
 PowerUp CreatePowerUp(Rectangle rect, Color rectColor, float heightPlus, float speedPlus, int ballsPlus)
 {

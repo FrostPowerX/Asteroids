@@ -5,7 +5,6 @@
 
 #include "raylib.h"
 
-#include "Constants.h"
 #include "Circle.h"
 #include "entities\Ball.h"
 

@@ -27,6 +27,13 @@
     <ClCompile Include="src\scenes\SceneCredits.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="src\scenes\SceneControlls.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\managers\SpriteManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\SceneGamePlay.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameLoop.h" />
@@ -59,6 +66,12 @@
     </ClInclude>
     <ClInclude Include="src\managers\SpriteManager.h">
       <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\SceneControlls.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\SceneGamePlay.h">
+      <Filter>Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

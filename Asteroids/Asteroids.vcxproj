@@ -23,7 +23,10 @@
     <ClCompile Include="src\entities\PowerUp.cpp" />
     <ClCompile Include="src\GameLoop.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\managers\SpriteManager.cpp" />
+    <ClCompile Include="src\scenes\SceneControlls.cpp" />
     <ClCompile Include="src\scenes\SceneCredits.cpp" />
+    <ClCompile Include="src\scenes\SceneGamePlay.cpp" />
     <ClCompile Include="src\scenes\SceneMenu.cpp" />
     <ClCompile Include="src\ui\Button.cpp" />
     <ClCompile Include="src\ui\Panel.cpp" />
@@ -35,7 +38,9 @@
     <ClInclude Include="src\entities\PowerUP.h" />
     <ClInclude Include="src\GameLoop.h" />
     <ClInclude Include="src\managers\SpriteManager.h" />
+    <ClInclude Include="src\scenes\SceneControlls.h" />
     <ClInclude Include="src\scenes\SceneCredits.h" />
+    <ClInclude Include="src\scenes\SceneGamePlay.h" />
     <ClInclude Include="src\scenes\SceneMenu.h" />
     <ClInclude Include="src\ui\Button.h" />
     <ClInclude Include="src\ui\Panel.h" />

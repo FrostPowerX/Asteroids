@@ -7,37 +7,47 @@
 #include "utilities/Circle.h"
 #include "entities/Bullet.h"
 
-namespace spaceship
+namespace game
 {
-	const int maxBullets = 25;
-
-	struct SpaceShip
+	namespace spaceship
 	{
-		Texture2D spriteSheet;
-		Rectangle source;
-		Rectangle dest;
-		Vector2 origin;
+		const int maxBullets = 25;
 
-		Circle body;
+		struct Graphic
+		{
+			Texture2D spriteSheet;
 
-		Vector2 velocity;
+			Rectangle source;
+			Rectangle dest;
+			Vector2 origin;
+		};
 
-		bullet::Bullet bullets[maxBullets];
+		struct SpaceShip
+		{
+			Circle body;
 
-		float speed;
-		float maxSpeed;
+			Graphic graphic;
 
-		int lives;
+			Vector2 velocity;
 
-		bool isAlive;
-	};
+			bullet::Bullet bullets[maxBullets];
 
-	SpaceShip Create(std::string texturePath, Rectangle source, Rectangle dest, Vector2 origin, float speed, float maxSpeed, int lives, bool isAlive);
+			float speed;
+			float maxSpeed;
+			float rotationAngle;
 
-	void Move(SpaceShip& sp, Vector2 target);
-	void Rotate(SpaceShip& sp, Vector2 target);
-	void Shoot(SpaceShip& sp);
+			int lives;
 
-	void Update(SpaceShip& sp);
-	void Draw(SpaceShip sp);
+			bool isAlive;
+		};
+
+		SpaceShip Create(Circle cir, Graphic graph, std::string textureName, float speed, float maxSpeed, int lives, bool isAlive);
+
+		void Move(SpaceShip& sp, Vector2 target);
+		void Rotate(SpaceShip& sp, Vector2 target);
+		void Shoot(SpaceShip& sp);
+
+		void Update(SpaceShip& sp);
+		void Draw(SpaceShip sp);
+	}
 }

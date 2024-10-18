@@ -36,6 +36,12 @@
     <ClCompile Include="src\scenes\SceneGamePlay.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="src\managers\InputManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\SpaceShip.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameLoop.h" />
@@ -74,6 +80,15 @@
     </ClInclude>
     <ClInclude Include="src\scenes\SceneGamePlay.h">
       <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\SpaceShip.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\Bullet.h">
+      <Filter>Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\managers\InputManager.h">
+      <Filter>Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

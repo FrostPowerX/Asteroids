@@ -5,6 +5,8 @@
 #include "GameLoop.h"
 #include "ui/Button.h"
 
+using namespace button;
+
 namespace game
 {
 	namespace scenes
@@ -15,7 +17,7 @@ namespace game
 
 			void Init()
 			{
-				example = CreateButton("Menu", 0, 0);
+				example = Create("Menu", 0, 0);
 			}
 
 			void Input()
@@ -24,14 +26,14 @@ namespace game
 
 			void Update()
 			{
-				MouseOnTopButton(example);
-				if (IsButtonPressed(example))
+				MouseOnTop(example);
+				if (IsPressed(example))
 					currentScene = SCENE::MENU;
 			}
 
 			void Draw()
 			{
-				DrawButton(example);
+				Draw(example);
 			}
 
 			void DeInit()

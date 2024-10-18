@@ -5,6 +5,8 @@
 #include "GameLoop.h"
 #include "ui/Button.h"
 
+using namespace button;
+
 namespace game
 {
 	namespace scenes
@@ -30,7 +32,7 @@ namespace game
 
 				for (int i = 0; i < maxButtons; i++)
 				{
-					buttons[i] = CreateButton(bNames[i], posx, posy);
+					buttons[i] = Create(bNames[i], posx, posy);
 					
 					posy += offset;
 				}
@@ -40,8 +42,8 @@ namespace game
 			{
 				for (int i = 0; i < maxButtons; i++)
 				{
-					MouseOnTopButton(buttons[i]);
-					if (IsButtonPressed(buttons[i]))
+					MouseOnTop(buttons[i]);
+					if (IsPressed(buttons[i]))
 						currentScene = SCENE(i);
 				}
 			}
@@ -55,7 +57,7 @@ namespace game
 			{
 				for (int i = 0; i < maxButtons; i++)
 				{
-					DrawButton(buttons[i]);
+					Draw(buttons[i]);
 				}
 			}
 

@@ -5,24 +5,39 @@
 #include "raylib.h"
 
 #include "utilities/Circle.h"
+#include "entities/Bullet.h"
 
-struct SpaceShip
+namespace spaceship
 {
-	Texture2D spriteSheet;
-	Rectangle source;
-	Rectangle dest;
-	Vector2 origin;
+	const int maxBullets = 25;
 
-	Circle body;
+	struct SpaceShip
+	{
+		Texture2D spriteSheet;
+		Rectangle source;
+		Rectangle dest;
+		Vector2 origin;
 
-	Vector2 velocity;
+		Circle body;
 
-	float speed;
-	float maxSpeed;
+		Vector2 velocity;
 
-	int lives;
+		bullet::Bullet bullets[maxBullets];
 
-	bool isAlive;
-};
+		float speed;
+		float maxSpeed;
 
-SpaceShip CreateShip(std::string path, Rectangle source, Rectangle dest, Vector2 origin);
+		int lives;
+
+		bool isAlive;
+	};
+
+	SpaceShip Create(std::string texturePath, Rectangle source, Rectangle dest, Vector2 origin, float speed, float maxSpeed, int lives, bool isAlive);
+
+	void Move(SpaceShip& sp, Vector2 target);
+	void Rotate(SpaceShip& sp, Vector2 target);
+	void Shoot(SpaceShip& sp);
+
+	void Update(SpaceShip& sp);
+	void Draw(SpaceShip sp);
+}

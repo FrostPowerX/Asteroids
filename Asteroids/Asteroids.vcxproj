@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\entities\Ball.cpp" />
+    <ClCompile Include="src\entities\Bullet.cpp" />
     <ClCompile Include="src\entities\PowerUp.cpp" />
     <ClCompile Include="src\entities\SpaceShip.cpp" />
     <ClCompile Include="src\GameLoop.cpp" />

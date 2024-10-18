@@ -42,6 +42,9 @@
     <ClCompile Include="src\entities\SpaceShip.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="src\entities\Bullet.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameLoop.h" />

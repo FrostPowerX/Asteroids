@@ -1,5 +1,4 @@
-#ifndef UTILS
-#define UTILS
+#pragma once
 
 #include <iostream>
 
@@ -7,6 +6,8 @@
 
 #include "Circle.h"
 #include "entities\Ball.h"
+
+using namespace ball;
 
 enum TYPE_PENETRATION
 {
@@ -30,10 +31,9 @@ TYPE_PENETRATION SolveCollision(Circle& entityA, Circle& entityB);
 TYPE_PENETRATION SolveCollisionMap(Ball&, float maxWidth, float minWidth, float maxHeight, float minHeight);
 TYPE_PENETRATION SolveCollisionMap(Rectangle&, float maxWidth, float minWidth, float maxHeight, float minHeight);
 
+void NormalizeVector(Vector2 vector);
 void NormalizeVector(float& x, float& y);
 
 void BouncingAngle(Ball& ball, Rectangle& rect);
 
 void BouncingBalls(Ball& c1, Ball& c2);
-
-#endif // UTILS

@@ -344,6 +344,18 @@ TYPE_PENETRATION SolveCollisionMap(Rectangle& entity, float maxWidth, float minW
 	return typeOfPenetration;
 }
 
+void NormalizeVector(Vector2 vector)
+{
+	Vector2 zero;
+	zero.x = 0;
+	zero.y = 0;
+
+	float length = sqrt(vector.x * vector.x + vector.y * vector.y);
+
+	vector.x = (length > 0.f) ? vector.x / length : zero.x;
+	vector.y = (length > 0.f) ? vector.y / length : zero.y;
+}
+
 void NormalizeVector(float& x, float& y)
 {
 	Vector2 zero;

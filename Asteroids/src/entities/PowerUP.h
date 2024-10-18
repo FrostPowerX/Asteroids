@@ -1,25 +1,25 @@
-#ifndef POWER_UP
-#define POWER_UP
+#pragma once
 
 #include "raylib.h"
 
-struct PowerUp
+namespace powerup
 {
-	Rectangle rect;
+	struct PowerUp
+	{
+		Rectangle rect;
 
-	Color rectColor;
+		Color rectColor;
 
-	float addHeight;
-	float addSpeed;
-	int addBalls;
+		float addHeight;
+		float addSpeed;
+		int addBalls;
 
-	int toPlayer;
+		int toPlayer;
 
-	bool isActive;
-};
+		bool isActive;
+	};
 
-PowerUp CreatePowerUp(Rectangle rect, Color rectColor, float heightPlus, float speedPlus, int ballsPlus);
+	PowerUp Create(Rectangle rect, Color rectColor, float heightPlus, float speedPlus, int ballsPlus);
 
-void DrawPowerUp(PowerUp& pUp, int screenWidth, int screenHeight);
-
-#endif // !POWER_UP
+	void Draw(PowerUp& pUp, int screenWidth, int screenHeight);
+}

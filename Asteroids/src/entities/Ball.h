@@ -1,39 +1,39 @@
-#ifndef BALL
-#define BALL
+#pragma once
 
 #include <iostream>
 
 #include "raylib.h"
 #include "..\utilities\Circle.h"
 
-struct Ball
+namespace ball
 {
-	Circle cir;
-	Color color;
-	Color colorBorder;
+	struct Ball
+	{
+		Circle cir;
+		Color color;
+		Color colorBorder;
 
-	float dirX;
-	float dirY;
+		float dirX;
+		float dirY;
 
-	float speed;
+		float speed;
 
-	int playerId;
+		int playerId;
 
-	bool isActive;
-};
+		bool isActive;
+	};
 
-Ball CreateBall(Color, float x, float y ,float radius, float speed);
+	Ball Create(Color, float x, float y, float radius, float speed);
 
-void TeleportBall(Ball&, float, float);
+	void Teleport(Ball&, float, float);
 
-void MoveBall(Ball&);
+	void Move(Ball&);
 
-void ChangeColorBall(Ball&, Color);
+	void ChangeColor(Ball&, Color);
 
-void ChangeRadiusBall(Ball&, float);
+	void ChangeRadius(Ball&, float);
 
-void ChangeBallSpeed(Ball&, float);
+	void ChangeSpeed(Ball&, float);
 
-void DrawBall(Ball&, int screenWidth, int screenHeight);
-
-#endif // !BALL
+	void Draw(Ball&, int screenWidth, int screenHeight);
+}

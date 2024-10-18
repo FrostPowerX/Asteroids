@@ -2,14 +2,24 @@
 
 #include "raylib.h"
 
-struct Bullet
+namespace bullet
 {
-	Vector2 direction;
-	Vector2 position;
+	struct Bullet
+	{
+		Vector2 direction;
+		Vector2 position;
 
-	float speed;
+		float speed;
 
-	float dmg;
+		float dmg;
 
-	float isAlive;
-};
+		bool isAlive;
+	};
+
+	Bullet Create(Vector2 position, Vector2 direction, float speed = 200, float dmg = 15, bool isAlive = true);
+
+	void Move(Bullet& bullet, Vector2 direction);
+	void Draw(Bullet bullet);
+
+	void OnCollision(Bullet& bullet);
+}

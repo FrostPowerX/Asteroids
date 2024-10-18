@@ -1,5 +1,4 @@
-#ifndef PANEL
-#define PANEL
+#pragma once
 
 #include <string>
 
@@ -7,35 +6,36 @@
 
 using namespace std;
 
-struct Panel
+namespace panel
 {
-	Rectangle rect;
-	
-	string text;
+	struct Panel
+	{
+		Rectangle rect;
 
-	Vector2 textPosition;
+		string text;
 
-	float minOffSetX = 0;
-	float maxOffSetX = 0;
+		Vector2 textPosition;
 
-	float minOffSetY = 0;
-	float maxOffSetY = 0;
+		float minOffSetX = 0;
+		float maxOffSetX = 0;
 
-	int fontSizeText = 0;
+		float minOffSetY = 0;
+		float maxOffSetY = 0;
 
-	Color rectColor = WHITE;
-	Color textColor = WHITE;
-};
+		int fontSizeText = 0;
 
-Panel CreatePanel(Rectangle rect, string text, float minOffSetX, float maxOffSetX, float minOffSetY, float maxOffSetY, int fontSize, Color rectColor, Color textColor);
+		Color rectColor = WHITE;
+		Color textColor = WHITE;
+	};
 
-void SetPanelPosition(Panel& panel, Vector2 newPos);
-/// Use this for change text
-void SetText(Panel& panel, string text);
-void SetColorText(Panel& panel, Color color);
-void SetBackGroundColor(Panel& panel, Color color);
+	Panel Create(Rectangle rect, string text, float minOffSetX, float maxOffSetX, float minOffSetY, float maxOffSetY, int fontSize, Color rectColor, Color textColor);
 
-void DrawPanel(Panel);
+	void SetPosition(Panel& panel, Vector2 newPos);
+	/// Use this for change text
+	void SetText(Panel& panel, string text);
+	void SetColorText(Panel& panel, Color color);
+	void SetBackGroundColor(Panel& panel, Color color);
 
-#endif // !PANEL
+	void Draw(Panel);
+}
 

@@ -1,22 +1,27 @@
 #include "Text.h"
 
-Text CreateText(std::string text, float x, float y, int font, Color color)
+namespace text
 {
-    Text newText;
+    Text Create(std::string text, float x, float y, int font, Color color)
+    {
+        Text newText;
 
-    newText.text = text;
+        newText.text = text;
 
-    newText.position.x = x;
-    newText.position.y = y;
+        newText.position.x = x;
+        newText.position.y = y;
 
-    newText.font = font;
+        newText.font = font;
 
-    newText.color = color;
+        newText.color = color;
 
-    return newText;
+        return newText;
+    }
+
+    void Draw(Text text)
+    {
+        DrawText(text.text.c_str(), static_cast<int>(text.position.x), static_cast<int>(text.position.y), text.font, text.color);
+    }
 }
 
-void DrawText(Text text)
-{
-    DrawText(text.text.c_str(), static_cast<int>(text.position.x), static_cast<int>(text.position.y), text.font, text.color);
-}
+

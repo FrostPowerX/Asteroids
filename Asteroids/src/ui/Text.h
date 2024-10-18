@@ -1,21 +1,21 @@
-#ifndef TEXT
-#define TEXT
+#pragma once
 
 #include <iostream>
 #include "raylib.h"
 
-struct Text
+namespace text
 {
-	Vector2 position;
-	std::string text;
+	struct Text
+	{
+		Vector2 position;
+		std::string text;
 
-	int font;
+		int font;
 
-	Color color;
-};
+		Color color;
+	};
 
-Text CreateText(std::string text, float x, float y, int font, Color color);
+	Text Create(std::string text, float x, float y, int font, Color color);
 
-void DrawText(Text text);
-
-#endif // !TEXT
+	void Draw(Text text);
+}

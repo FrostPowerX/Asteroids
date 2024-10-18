@@ -1,47 +1,48 @@
-#ifndef BUTTON
-#define BUTTON
+#pragma once
 
 #include <string>
 
 #include "raylib.h"
 
-const float ButtonWidth = 120;
-const float ButtonHeight = 40;
-const int ButtonFont = 10;
-
-struct Button
+namespace button
 {
-	Rectangle rect;
 
-	std::string text;
+	const float ButtonWidth = 120;
+	const float ButtonHeight = 40;
+	const int ButtonFont = 10;
 
-	Vector2 textPosition;
+	struct Button
+	{
+		Rectangle rect;
 
-	Color normalColor;
-	Color onMouseTopColor;
-	Color pressedColor;
+		std::string text;
 
-	Color textColor;
+		Vector2 textPosition;
 
-	int fontSize;
+		Color normalColor;
+		Color onMouseTopColor;
+		Color pressedColor;
 
-	bool isPressed;
-	bool isReleased;
-	bool isMouseOnTop;
-};
+		Color textColor;
 
-Button CreateButton(std::string text, Vector2 position, float width = ButtonWidth, float height = ButtonHeight, int fontSize = ButtonFont, Color textColor = BLACK, Color normal = WHITE, Color onTop = GRAY, Color pressed = DARKGRAY);
-Button CreateButton(std::string text, float x, float y, float width = ButtonWidth, float height = ButtonHeight, int fontSize = ButtonFont, Color textColor = BLACK, Color normal = WHITE, Color onTop = GRAY, Color pressed = DARKGRAY);
+		int fontSize;
 
-Vector2 GetCenterPositionButton(Button);
+		bool isPressed;
+		bool isReleased;
+		bool isMouseOnTop;
+	};
 
-void SetButtonPosition(Button& button, Vector2 newPosition);
+	Button Create(std::string text, Vector2 position, float width = ButtonWidth, float height = ButtonHeight, int fontSize = ButtonFont, Color textColor = BLACK, Color normal = WHITE, Color onTop = GRAY, Color pressed = DARKGRAY);
+	Button Create(std::string text, float x, float y, float width = ButtonWidth, float height = ButtonHeight, int fontSize = ButtonFont, Color textColor = BLACK, Color normal = WHITE, Color onTop = GRAY, Color pressed = DARKGRAY);
 
-bool MouseOnTopButton(Button&);
-bool IsButtonPressed(Button&);
+	Vector2 GetCenterPosition(Button);
 
-void SetText(Button& button, std::string text);
+	void SetPosition(Button& button, Vector2 newPosition);
 
-void DrawButton(Button);
+	bool MouseOnTop(Button&);
+	bool IsPressed(Button&);
 
-#endif // !BUTTON
+	void SetText(Button& button, std::string text);
+
+	void Draw(Button);
+}

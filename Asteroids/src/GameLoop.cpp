@@ -7,6 +7,7 @@
 #include "scenes/SceneCredits.h"
 #include "scenes/SceneMenu.h"
 
+#include "managers/InputManager.h"
 #include "managers/SpriteManager.h"
 
 namespace game
@@ -46,7 +47,10 @@ namespace game
 		InitWindow(ScreenWidth, ScreenHeight, GameName.c_str());
 		SetExitKey(KEY_NULL);
 
-		game::scenes::gameplay::Init();
+		spritemanager::AddSprite("PlayerShip", "res/SpaceShip.png");
+		input::AddKey(' ', "Shoot");
+
+		scenes::gameplay::Init();
 		scenes::controlls::Init();
 		scenes::credits::Init();
 		scenes::menu::Init();

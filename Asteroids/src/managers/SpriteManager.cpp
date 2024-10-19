@@ -6,6 +6,8 @@ namespace game
 	{
 		std::vector<Sprite*> sprites;
 
+		void AddSprite(std::string name, std::string path);
+
 		void AddSprite(std::string name, std::string path)
 		{
 			Sprite* newSp = new Sprite();
@@ -27,6 +29,12 @@ namespace game
 			}
 
 		}
+
+		void LoadSprites()
+		{
+			AddSprite("PlayerShip", "res/SpaceShip.png");
+		}
+
 		void UnloadSprites()
 		{
 			int size = sprites.size();

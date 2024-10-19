@@ -18,6 +18,8 @@ namespace game
 
 	SCENE currentScene = SCENE::MENU;
 
+	SCENE prevScene = SCENE::MENU;
+
 	bool programLoop = true;
 
 	void Init();
@@ -37,6 +39,8 @@ namespace game
 			Input();
 			Update();
 			Draw();
+
+			prevScene = currentScene;
 		}
 
 		DeInit();
@@ -47,9 +51,10 @@ namespace game
 		InitWindow(ScreenWidth, ScreenHeight, GameName.c_str());
 		SetExitKey(KEY_NULL);
 
-		spritemanager::AddSprite("PlayerShip", "res/SpaceShip.png");
-		input::AddKey(' ', "Shoot");
 
+		spritemanager::LoadSprites();
+
+		input::Init();
 		scenes::gameplay::Init();
 		scenes::controlls::Init();
 		scenes::credits::Init();
@@ -60,19 +65,19 @@ namespace game
 	{
 		switch (currentScene)
 		{
-		case game::SCENE::GAMEPLAY:
-			game::scenes::gameplay::Input();
+		case SCENE::GAMEPLAY:
+			scenes::gameplay::Input();
 			break;
 
-		case game::SCENE::CONTROLLS:
-			game::scenes::controlls::Input();
+		case SCENE::CONTROLLS:
+			scenes::controlls::Input();
 			break;
 
-		case game::SCENE::CREDITS:
+		case SCENE::CREDITS:
 			scenes::credits::Input();
 			break;
 
-		case game::SCENE::MENU:
+		case SCENE::MENU:
 			scenes::menu::Input();
 			break;
 		}
@@ -82,25 +87,41 @@ namespace game
 	{
 		switch (currentScene)
 		{
-		case game::SCENE::GAMEPLAY:
-			game::scenes::gameplay::Update();
+		case SCENE::GAMEPLAY:
+			scenes::gameplay::Update();
 			break;
 
-		case game::SCENE::CONTROLLS:
-			game::scenes::controlls::Update();
+		case SCENE::CONTROLLS:
+			scenes::controlls::Update();
 			break;
 
-		case game::SCENE::CREDITS:
+		case SCENE::CREDITS:
 			scenes::credits::Update();
 			break;
 
-		case game::SCENE::MENU:
+		case SCENE::MENU:
 			scenes::menu::Update();
 			break;
 
-		case game::SCENE::EXIT:
+		case SCENE::EXIT:
 			programLoop = false;
 			break;
+		}
+
+		if (prevScene != currentScene)
+		{
+			switch (prevScene)
+			{
+			case game::SCENE::GAMEPLAY:
+				scenes::gameplay::Init();
+				break;
+			case game::SCENE::CONTROLLS:
+				scenes::controlls::Init();
+				break;
+			case game::SCENE::CREDITS:
+				scenes::credits::Init();
+				break;
+			}
 		}
 	}
 
@@ -112,19 +133,19 @@ namespace game
 
 		switch (currentScene)
 		{
-		case game::SCENE::GAMEPLAY:
-			game::scenes::gameplay::Draw();
+		case SCENE::GAMEPLAY:
+			scenes::gameplay::Draw();
 			break;
 
-		case game::SCENE::CONTROLLS:
-			game::scenes::controlls::Draw();
+		case SCENE::CONTROLLS:
+			scenes::controlls::Draw();
 			break;
 
-		case game::SCENE::CREDITS:
+		case SCENE::CREDITS:
 			scenes::credits::Draw();
 			break;
 
-		case game::SCENE::MENU:
+		case SCENE::MENU:
 			scenes::menu::Draw();
 			break;
 		}

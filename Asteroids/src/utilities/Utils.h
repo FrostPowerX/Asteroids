@@ -31,8 +31,12 @@ TYPE_PENETRATION SolveCollision(Circle& entityA, Circle& entityB);
 TYPE_PENETRATION SolveCollisionMap(Ball&, float maxWidth, float minWidth, float maxHeight, float minHeight);
 TYPE_PENETRATION SolveCollisionMap(Rectangle&, float maxWidth, float minWidth, float maxHeight, float minHeight);
 
-void NormalizeVector(Vector2 vector);
+Vector2 NormalizeVector(Vector2 vector);
 void NormalizeVector(float& x, float& y);
+
+float GetMagnitud(Vector2 vector);
+
+double RadiansToGrades(double r);
 
 void BouncingAngle(Ball& ball, Rectangle& rect);
 

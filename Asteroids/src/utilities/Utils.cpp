@@ -344,7 +344,7 @@ TYPE_PENETRATION SolveCollisionMap(Rectangle& entity, float maxWidth, float minW
 	return typeOfPenetration;
 }
 
-void NormalizeVector(Vector2 vector)
+Vector2 NormalizeVector(Vector2 vector)
 {
 	Vector2 zero;
 	zero.x = 0;
@@ -354,6 +354,8 @@ void NormalizeVector(Vector2 vector)
 
 	vector.x = (length > 0.f) ? vector.x / length : zero.x;
 	vector.y = (length > 0.f) ? vector.y / length : zero.y;
+
+	return vector;
 }
 
 void NormalizeVector(float& x, float& y)
@@ -366,6 +368,16 @@ void NormalizeVector(float& x, float& y)
 
 	x = (length > 0.f) ? x / length : zero.x;
 	y = (length > 0.f) ? y / length : zero.y;
+}
+
+float GetMagnitud(Vector2 vector)
+{
+	return sqrt(vector.x * vector.x + vector.y * vector.y);
+}
+
+double RadiansToGrades(double r)
+{
+	return r * (180.0 / PI);
 }
 
 void BouncingAngle(Ball& ball, Rectangle& rect)

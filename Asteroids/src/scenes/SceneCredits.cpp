@@ -3,6 +3,9 @@
 #include "raylib.h"
 
 #include "GameLoop.h"
+
+#include "managers/InputManager.h"
+
 #include "ui/Button.h"
 
 using namespace button;
@@ -22,6 +25,8 @@ namespace game
 
 			void Input()
 			{
+				if (input::GetKey("Back"))
+					currentScene = SCENE::MENU;
 			}
 
 			void Update()

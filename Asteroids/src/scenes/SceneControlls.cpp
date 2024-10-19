@@ -1,5 +1,9 @@
 #include "SceneControlls.h"
 
+#include "GameLoop.h"
+
+#include "managers/InputManager.h"
+
 namespace game
 {
 	namespace scenes
@@ -15,7 +19,8 @@ namespace game
 
 			void Input()
 			{
-
+				if (input::GetKey("Back"))
+					currentScene = SCENE::MENU;
 			}
 			void Update()
 			{

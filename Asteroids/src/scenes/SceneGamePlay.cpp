@@ -1,7 +1,8 @@
 #include "SceneGamePlay.h"
 
+#include "GameLoop.h"
 #include "entities/SpaceShip.h"
-
+#include "managers/InputManager.h"
 
 namespace game
 {
@@ -22,7 +23,8 @@ namespace game
 
 			void Input()
 			{
-
+				if (input::GetKey("Back"))
+					currentScene = SCENE::MENU;
 			}
 			void Update()
 			{
@@ -44,10 +46,14 @@ namespace game
 				float screenHeight = GetScreenHeight();
 
 				Rectangle source{ 0,0,32,32 };
-				Rectangle dest{ 0,0,16,16 };
-				Vector2 origin{ 0,0 };
+				Rectangle dest{ 0,0,32,32 };
+				Vector2 origin{ 16,16 };
 
 				Circle cir;
+				cir.x = screenWidth / 2;
+				cir.y = screenHeight / 2;
+				cir.radius = 15;
+
 
 				std::string textureName = "PlayerShip";
 
@@ -56,7 +62,7 @@ namespace game
 								dest,
 								origin };
 
-				player = Create(cir, graph, textureName, 500, 800, 3, true);
+				player = Create(cir, graph, textureName, 500, 500, 3, true);
 			}
 		}
 	}

@@ -5,22 +5,18 @@
 #include "raylib.h"
 
 #include "utilities/Circle.h"
+
 #include "entities/Bullet.h"
+
+#include "managers/SpriteManager.h"
+
+using namespace game::spritemanager;
 
 namespace game
 {
 	namespace spaceship
 	{
 		const int maxBullets = 25;
-
-		struct Graphic
-		{
-			Texture2D spriteSheet;
-
-			Rectangle source;
-			Rectangle dest;
-			Vector2 origin;
-		};
 
 		struct SpaceShip
 		{
@@ -41,11 +37,7 @@ namespace game
 			bool isAlive;
 		};
 
-		SpaceShip Create(Circle cir, Graphic graph, std::string textureName, float speed, float maxSpeed, int lives, bool isAlive);
-
-		void Move(SpaceShip& sp, Vector2 target);
-		void Rotate(SpaceShip& sp, Vector2 target);
-		void Shoot(SpaceShip& sp);
+		SpaceShip Create(Circle cir, Rectangle dest, std::string textureName, float speed, float maxSpeed, int lives, bool isAlive);
 
 		void Update(SpaceShip& sp);
 		void Draw(SpaceShip sp);

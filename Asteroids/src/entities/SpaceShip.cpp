@@ -3,8 +3,10 @@
 #include <math.h>
 
 #include "managers/InputManager.h"
-#include "managers/SpriteManager.h"
+#include "managers/ResolutionManager.h"
 #include "utilities/Utils.h"
+
+using namespace game::resolutionmanager;
 
 namespace game
 {
@@ -17,20 +19,26 @@ namespace game
 		void ActualizePos(SpaceShip& sp);
 		void NormalizeVelocity(SpaceShip& sp);
 
-		SpaceShip Create(Circle cir, Graphic graph, std::string textureName, float speed, float maxSpeed, int lives, bool isAlive)
+		SpaceShip Create(Circle cir, Rectangle dest, std::string textureName, float speed, float maxSpeed, int lives, bool isAlive)
 		{
 			SpaceShip ship;
+
+			cir.radius *= GetScalef();
+
 			ship.body = cir;
 
-			graph.dest.x = cir.x;
-			graph.dest.y = cir.y;
+			dest.width *= GetScale().x;
+			dest.height *= GetScale().y;
+
+			dest.x = cir.x;
+			dest.y = cir.y;
 
 			ship.velocity = Vector2{ 0,0 };
 			ship.rotationAngle = 0;
 
-			ship.graphic.source = graph.source;
-			ship.graphic.dest = graph.dest;
-			ship.graphic.origin = graph.origin;
+			ship.graphic.source = Rectangle{ 0,0,textureWidth,textureHeight };
+			ship.graphic.dest = dest;
+			ship.graphic.origin = Vector2{ (textureWidth / 2) * GetScale().x,(textureHeight / 2) * GetScale().y };
 
 			ship.speed = speed;
 			ship.maxSpeed = maxSpeed;
@@ -51,7 +59,7 @@ namespace game
 			if (input::GetKey("Shoot"))
 				Shoot(sp);
 
-			if(input::GetKey("Move"))
+			if (input::GetKey("Move"))
 				Move(sp, GetMousePosition());
 
 			ActualizePos(sp);
@@ -59,7 +67,7 @@ namespace game
 
 		void Draw(SpaceShip sp)
 		{
-			DrawCircle(sp.body.x, sp.body.y, sp.body.radius, RED);
+			DrawCircleLines(sp.body.x, sp.body.y, sp.body.radius, WHITE);
 			DrawTexturePro(sp.graphic.spriteSheet, sp.graphic.source, sp.graphic.dest, sp.graphic.origin, sp.rotationAngle + 90, WHITE);
 		}
 
@@ -86,6 +94,9 @@ namespace game
 		{
 			double x = target.x - sp.body.x;
 			double y = target.y - sp.body.y;
+
+			if (target.x == sp.body.x && target.y == sp.body.y)
+				return;
 
 			double angle = atan(y / x);
 

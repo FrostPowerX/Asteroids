@@ -52,7 +52,7 @@ namespace game
 				cir.y = screenHeight / 2;
 				cir.radius = 15;
 
-				player = Create(cir, dest, "PlayerShip", 8000, 500, 3, true);
+				player = Create(cir, dest, "PlayerShip", 500, 500);
 			}
 		}
 	}

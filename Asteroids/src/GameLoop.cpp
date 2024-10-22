@@ -7,13 +7,16 @@
 #include "scenes/SceneCredits.h"
 #include "scenes/SceneMenu.h"
 
-#include "managers/InputManager.h"
+#include "managers/ResolutionManager.h"
 #include "managers/SpriteManager.h"
+#include "managers/InputManager.h"
+
+using namespace game::resolutionmanager;
 
 namespace game
 {
-	const int ScreenWidth = 800;
-	const int ScreenHeight = 600;
+	const int ScreenWidth = 1024;
+	const int ScreenHeight = 768;
 	const std::string GameName = "Asteroids";
 
 	SCENE currentScene = SCENE::MENU;
@@ -55,6 +58,7 @@ namespace game
 		spritemanager::LoadSprites();
 
 		input::Init();
+		resolutionmanager::Init();
 		scenes::gameplay::Init();
 		scenes::controlls::Init();
 		scenes::credits::Init();
@@ -80,6 +84,33 @@ namespace game
 		case SCENE::MENU:
 			scenes::menu::Input();
 			break;
+		}
+
+		if (input::GetKey("res1"))
+		{
+			SetResolution(Vector2{ 800,600 });
+			scenes::gameplay::Init();
+			scenes::controlls::Init();
+			scenes::credits::Init();
+			scenes::menu::Init();
+		}
+
+		if (input::GetKey("res2"))
+		{
+			SetResolution(Vector2{ 1024,768 });
+			scenes::gameplay::Init();
+			scenes::controlls::Init();
+			scenes::credits::Init();
+			scenes::menu::Init();
+		}
+
+		if (input::GetKey("res3"))
+		{
+			SetResolution(Vector2{ 1920,1080 });
+			scenes::gameplay::Init();
+			scenes::controlls::Init();
+			scenes::credits::Init();
+			scenes::menu::Init();
 		}
 	}
 

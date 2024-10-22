@@ -4,7 +4,11 @@
 
 #include "GameLoop.h"
 
+#include "managers/ResolutionManager.h"
+
 #include "ui/Button.h"
+
+using namespace game::resolutionmanager;
 
 using namespace button;
 
@@ -19,13 +23,12 @@ namespace game
 			Button buttons[maxButtons];
 			std::string bNames[maxButtons];
 
-			float offset = ButtonHeight * 2;
-			float posx = ScreenWidth / 2;
-			float posy = offset;
-
-
 			void Init()
 			{
+				float offset = (ButtonHeight * GetScale().y) * 2.f;
+				float posx = currentWidth / 2.f;
+				float posy = offset;
+
 				bNames[0] = "Play";
 				bNames[1] = "Controlls";
 				bNames[2] = "Credits";

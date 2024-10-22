@@ -45,6 +45,15 @@
     <ClCompile Include="src\entities\Bullet.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
+    <ClCompile Include="src\managers\CollisionManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\managers\ResolutionManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entities\Asteroid.cpp">
+      <Filter>Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameLoop.h" />
@@ -92,6 +101,15 @@
     </ClInclude>
     <ClInclude Include="src\managers\InputManager.h">
       <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\managers\CollisionManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\managers\ResolutionManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\entities\Asteroid.h">
+      <Filter>Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -45,9 +45,6 @@
     <ClCompile Include="src\entities\Bullet.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="src\managers\CollisionManager.cpp">
-      <Filter>Managers</Filter>
-    </ClCompile>
     <ClCompile Include="src\managers\ResolutionManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
@@ -100,9 +97,6 @@
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="src\managers\InputManager.h">
-      <Filter>Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="src\managers\CollisionManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="src\managers\ResolutionManager.h">

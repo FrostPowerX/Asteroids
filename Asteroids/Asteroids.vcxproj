@@ -26,7 +26,6 @@
     <ClCompile Include="src\entities\SpaceShip.cpp" />
     <ClCompile Include="src\GameLoop.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\managers\CollisionManager.cpp" />
     <ClCompile Include="src\managers\InputManager.cpp" />
     <ClCompile Include="src\managers\ResolutionManager.cpp" />
     <ClCompile Include="src\managers\SpriteManager.cpp" />
@@ -46,7 +45,6 @@
     <ClInclude Include="src\entities\PowerUP.h" />
     <ClInclude Include="src\entities\SpaceShip.h" />
     <ClInclude Include="src\GameLoop.h" />
-    <ClInclude Include="src\managers\CollisionManager.h" />
     <ClInclude Include="src\managers\InputManager.h" />
     <ClInclude Include="src\managers\ResolutionManager.h" />
     <ClInclude Include="src\managers\SpriteManager.h" />

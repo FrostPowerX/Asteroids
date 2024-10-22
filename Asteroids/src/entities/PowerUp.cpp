@@ -1,10 +1,17 @@
 #include "PowerUP.h"
 
+#include "managers/ResolutionManager.h"
+
+using namespace game::resolutionmanager;
+
 namespace powerup
 {
 	PowerUp Create(Rectangle rect, Color rectColor, float heightPlus, float speedPlus, int ballsPlus)
 	{
 		PowerUp newPowerUp;
+
+		rect.width *= GetScale().x;
+		rect.height *= GetScale().y;
 
 		newPowerUp.rect = rect;
 		newPowerUp.rectColor = rectColor;

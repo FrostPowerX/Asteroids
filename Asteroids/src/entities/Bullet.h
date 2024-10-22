@@ -6,8 +6,9 @@ namespace bullet
 {
 	struct Bullet
 	{
+		Rectangle rect;
+
 		Vector2 target;
-		Vector2 position;
 
 		float speed;
 
@@ -16,7 +17,7 @@ namespace bullet
 		bool isAlive;
 	};
 
-	Bullet Create(Vector2 position, Vector2 direction, float speed = 200, float dmg = 15, bool isAlive = true);
+	Bullet Create(Rectangle rect, Vector2 direction, float speed = 200, float dmg = 15, bool isAlive = true);
 
 	void Move(Bullet& bullet);
 

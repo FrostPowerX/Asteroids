@@ -1,8 +1,12 @@
 #include "Bullet.h"
 
+#include "managers/ResolutionManager.h"
+
+using namespace game::resolutionmanager;
+
 namespace bullet
 {
-	Bullet Create(Vector2 position, Vector2 direction, float speed, float dmg, bool isAlive)
+	Bullet Create(Rectangle rect, Vector2 direction, float speed, float dmg, bool isAlive)
 	{
 		return Bullet();
 	}

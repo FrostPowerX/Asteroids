@@ -18,20 +18,20 @@ namespace game
 
 			Graphic graphic;
 
-			Vector2 velocity;
+			Vector2 target;
+			Vector2 dir;
 
 			float speed;
-			float maxSpeed;
 			float rotationAngle;
 
 			bool isAlive;
 		};
 
-		Asteroid Create(Circle cir, Rectangle dest, std::string textureName, float speed, float maxSpeed, bool isAlive);
+		Asteroid Create(Circle cir, Rectangle dest, std::string textureName, Vector2 target, float speed, bool isAlive = false);
 
-		void Update(Asteroid a);
-		void Draw(Asteroid a);
+		void Update(Asteroid& ast);
+		void Draw(Asteroid ast);
 
-		bool IsAlive(Asteroid a);
+		void SetTarget(Asteroid& ast, Vector2 target);
 	}
 }

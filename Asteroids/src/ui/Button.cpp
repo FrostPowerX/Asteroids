@@ -1,18 +1,21 @@
 #include "Button.h"
 
+#include "managers/ResolutionManager.h"
+
+using namespace game::resolutionmanager;
+
 namespace button
 {
 	Button Create(std::string text, Vector2 position, float width, float height, int fontSize, Color textColor, Color normal, Color onTop, Color pressed)
 	{
 		Button newB;
 
-		newB.rect.x = position.x;
-		newB.rect.y = position.y;
-		newB.rect.width = width;
-		newB.rect.height = height;
+		newB.rect.width = width * GetScale().x;
+		newB.rect.height = height * GetScale().y;
+		SetPosition(newB, position);
 
 		newB.text = text;
-		newB.fontSize = fontSize;
+		newB.fontSize = fontSize * GetScalef();
 		newB.textColor = textColor;
 
 		newB.normalColor = normal;
@@ -28,12 +31,12 @@ namespace button
 	{
 		Button newB;
 
-		newB.rect.width = width;
-		newB.rect.height = height;
+		newB.rect.width = width * GetScale().x;
+		newB.rect.height = height * GetScale().y;
 		SetPosition(newB, Vector2{ x,y });
 
 		newB.text = text;
-		newB.fontSize = fontSize;
+		newB.fontSize = fontSize * GetScalef();
 		newB.textColor = textColor;
 
 		newB.normalColor = normal;

@@ -1,10 +1,17 @@
 #include "Panel.h"
 
+#include "managers/ResolutionManager.h"
+
+using namespace game::resolutionmanager;
+
 namespace panel
 {
     Panel Create(Rectangle rect, string text, float minOffSetX, float maxOffSetX, float minOffSetY, float maxOffSetY, int fontSize, Color rectColor, Color textColor)
     {
         Panel newP;
+
+        rect.width *= GetScale().x;
+        rect.height *= GetScale().y;
 
         newP.rect = rect;
         newP.text = text;
@@ -15,7 +22,7 @@ namespace panel
         newP.minOffSetY = minOffSetY;
         newP.maxOffSetY = maxOffSetY;
 
-        newP.fontSizeText = fontSize;
+        newP.fontSizeText = fontSize * GetScalef();
 
         newP.rectColor = rectColor;
         newP.textColor = textColor;

@@ -1,5 +1,9 @@
 #include "Text.h"
 
+#include "managers/ResolutionManager.h"
+
+using namespace game::resolutionmanager;
+
 namespace text
 {
     Text Create(std::string text, float x, float y, int font, Color color)
@@ -11,7 +15,7 @@ namespace text
         newText.position.x = x;
         newText.position.y = y;
 
-        newText.font = font;
+        newText.font = font * GetScalef();
 
         newText.color = color;
 

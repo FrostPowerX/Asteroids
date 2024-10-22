@@ -32,12 +32,17 @@ namespace game
 			float maxSpeed;
 			float rotationAngle;
 
+			float reloadTime;
+			float resetTime;
+
 			int lives;
 
 			bool isAlive;
 		};
 
-		SpaceShip Create(Circle cir, Rectangle dest, std::string textureName, float speed, float maxSpeed, int lives, bool isAlive);
+		SpaceShip Create(Circle cir, Rectangle dest, std::string textureName, float speed, float maxSpeed, float reloadTime = 0.2f, int lives = 3, bool isAlive = true);
+
+		void TakeDamage(SpaceShip& sp);
 
 		void Update(SpaceShip& sp);
 		void Draw(SpaceShip sp);

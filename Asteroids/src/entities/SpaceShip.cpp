@@ -16,10 +16,12 @@ namespace game
 		void Rotate(SpaceShip& sp, Vector2 target);
 		void Shoot(SpaceShip& sp);
 
+		void ActiveBullet(SpaceShip& sp);
+
 		void ActualizePos(SpaceShip& sp);
 		void NormalizeVelocity(SpaceShip& sp);
 
-		SpaceShip Create(Circle cir, Rectangle dest, std::string textureName, float speed, float maxSpeed, int lives, bool isAlive)
+		SpaceShip Create(Circle cir, Rectangle dest, std::string textureName, float speed, float maxSpeed, float reloadTime, int lives, bool isAlive)
 		{
 			SpaceShip ship;
 
@@ -27,18 +29,21 @@ namespace game
 
 			ship.body = cir;
 
+			ship.graphic.origin = Vector2{ (dest.width / 2) * GetScale().x,(dest.height / 2) * GetScale().y };
 			dest.width *= GetScale().x;
 			dest.height *= GetScale().y;
 
 			dest.x = cir.x;
 			dest.y = cir.y;
 
+			ship.reloadTime = 0;
+			ship.resetTime = reloadTime;
+
 			ship.velocity = Vector2{ 0,0 };
 			ship.rotationAngle = 0;
 
 			ship.graphic.source = Rectangle{ 0,0,textureWidth,textureHeight };
 			ship.graphic.dest = dest;
-			ship.graphic.origin = Vector2{ (textureWidth / 2) * GetScale().x,(textureHeight / 2) * GetScale().y };
 
 			ship.speed = speed;
 			ship.maxSpeed = maxSpeed;
@@ -49,31 +54,63 @@ namespace game
 
 			ship.graphic.spriteSheet = spritemanager::GetSprite(textureName).texture;
 
+			for (int i = 0; i < maxBullets; i++)
+			{
+				Rectangle rect = Rectangle{ 0,0,16,16 };
+				Circle cir = ship.body;
+				cir.radius = 5;
+
+				ship.bullets[i] = bullet::Create(cir, rect, "PlayerShip", Vector2{ 0,0 });
+			}
+
 			return ship;
+		}
+
+		void TakeDamage(SpaceShip& sp)
+		{
+
 		}
 
 		void Update(SpaceShip& sp)
 		{
+			for (int i = 0; i < maxBullets; i++)
+			{
+				bullet::Update(sp.bullets[i]);
+			}
+
+			if (!sp.isAlive)
+				return;
+
 			Rotate(sp, GetMousePosition());
 
-			if (input::GetKey("Shoot"))
+			if (input::GetKey("Shoot") && sp.reloadTime == 0)
 				Shoot(sp);
 
 			if (input::GetKey("Move"))
 				Move(sp, GetMousePosition());
+
+			sp.reloadTime -= (GetFrameTime() < sp.reloadTime) ? GetFrameTime() : sp.reloadTime;
 
 			ActualizePos(sp);
 		}
 
 		void Draw(SpaceShip sp)
 		{
-			DrawCircleLines(sp.body.x, sp.body.y, sp.body.radius, WHITE);
+			for (int i = 0; i < maxBullets; i++)
+			{
+				bullet::Draw(sp.bullets[i]);
+			}
+
+			if (!sp.isAlive)
+				return;
+
+			DrawCircleLines(static_cast<int>(sp.body.x), static_cast<int>(sp.body.y), sp.body.radius, WHITE);
 			DrawTexturePro(sp.graphic.spriteSheet, sp.graphic.source, sp.graphic.dest, sp.graphic.origin, sp.rotationAngle + 90, WHITE);
 		}
 
 		void Move(SpaceShip& sp, Vector2 target)
 		{
-			Vector2 normDir;
+			Vector2 normDir = Vector2{ 0,0 };
 			normDir.x = target.x - sp.body.x;
 			normDir.y = target.y - sp.body.y;
 			normDir = NormalizeVector(normDir);
@@ -92,15 +129,15 @@ namespace game
 		}
 		void Rotate(SpaceShip& sp, Vector2 target)
 		{
-			double x = target.x - sp.body.x;
-			double y = target.y - sp.body.y;
+			float x = target.x - sp.body.x;
+			float y = target.y - sp.body.y;
 
 			if (target.x == sp.body.x && target.y == sp.body.y)
 				return;
 
-			double angle = atan(y / x);
+			float angle = atan(y / x);
 
-			angle = RadiansToGrades(angle);
+			angle = static_cast<float>(RadiansToGrades(angle));
 
 			if (x < 0 && y > 0)
 				angle += 180;
@@ -113,7 +150,21 @@ namespace game
 		}
 		void Shoot(SpaceShip& sp)
 		{
-			std::cout << "Disparo\n";
+			ActiveBullet(sp);
+
+			sp.reloadTime = sp.resetTime;
+		}
+
+		void ActiveBullet(SpaceShip& sp)
+		{
+			for (int i = 0; i < maxBullets; i++)
+			{
+				if (!sp.bullets[i].isAlive)
+				{
+					bullet::Shoot(sp.bullets[i], Vector2{ sp.body.x,sp.body.y }, GetMousePosition());
+					break;
+				}
+			}
 		}
 
 		void ActualizePos(SpaceShip& sp)

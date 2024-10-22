@@ -45,24 +45,14 @@ namespace game
 				float screenWidth = GetScreenWidth();
 				float screenHeight = GetScreenHeight();
 
-				Rectangle source{ 0,0,32,32 };
 				Rectangle dest{ 0,0,32,32 };
-				Vector2 origin{ 16,16 };
 
 				Circle cir;
 				cir.x = screenWidth / 2;
 				cir.y = screenHeight / 2;
 				cir.radius = 15;
 
-
-				std::string textureName = "PlayerShip";
-
-				Graphic graph{ Texture2D(),
-								source,
-								dest,
-								origin };
-
-				player = Create(cir, graph, textureName, 500, 500, 3, true);
+				player = Create(cir, dest, "PlayerShip", 8000, 500, 3, true);
 			}
 		}
 	}

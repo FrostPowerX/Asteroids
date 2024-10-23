@@ -33,6 +33,7 @@ namespace game
 		void LoadSprites()
 		{
 			AddSprite("PlayerShip", "res/SpaceShip.png");
+			AddSprite("Asteroid", "res/Asteroid.png");
 		}
 
 		void UnloadSprites()

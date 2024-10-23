@@ -20,7 +20,6 @@ namespace game
 
 			newA.body = cir;
 
-			newA.graphic.origin = Vector2{ (dest.width / 2) * GetScale().x,(dest.height / 2) * GetScale().y };
 			dest.width *= GetScale().x;
 			dest.height *= GetScale().y;
 
@@ -29,6 +28,7 @@ namespace game
 
 			newA.rotationAngle = GetRandomValue(0,360);
 
+			newA.graphic.origin = Vector2{ (dest.width / 2), (dest.height / 2) };
 			newA.graphic.source = Rectangle{ 0,0,textureWidth,textureHeight };
 			newA.graphic.dest = dest;
 
@@ -47,6 +47,9 @@ namespace game
 		{
 			ast.body.x += ast.dir.x * ast.speed * GetFrameTime();
 			ast.body.y += ast.dir.y * ast.speed * GetFrameTime();
+
+			ast.graphic.dest.x = ast.body.x;
+			ast.graphic.dest.y = ast.body.y;
 		}
 
 		void Update(Asteroid& ast)

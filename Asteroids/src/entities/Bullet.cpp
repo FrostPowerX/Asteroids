@@ -18,7 +18,6 @@ namespace bullet
 
 		newB.body = cir;
 
-		newB.graphic.origin = Vector2{ (dest.width / 2) * GetScale().x,(dest.height / 2) * GetScale().y };
 		dest.width *= GetScale().x;
 		dest.height *= GetScale().y;
 
@@ -29,6 +28,7 @@ namespace bullet
 		newB.resetTime = timeAlive;
 		newB.rotationAngle = 0;
 
+		newB.graphic.origin = Vector2{ (dest.width / 2),(dest.height / 2) };
 		newB.graphic.source = Rectangle{ 0,0,textureWidth,textureHeight };
 		newB.graphic.dest = dest;
 

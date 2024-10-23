@@ -29,7 +29,6 @@ namespace game
 
 			ship.body = cir;
 
-			ship.graphic.origin = Vector2{ (dest.width / 2) * GetScale().x,(dest.height / 2) * GetScale().y };
 			dest.width *= GetScale().x;
 			dest.height *= GetScale().y;
 
@@ -42,6 +41,7 @@ namespace game
 			ship.velocity = Vector2{ 0,0 };
 			ship.rotationAngle = 0;
 
+			ship.graphic.origin = Vector2{ (dest.width / 2),(dest.height / 2) };
 			ship.graphic.source = Rectangle{ 0,0,textureWidth,textureHeight };
 			ship.graphic.dest = dest;
 

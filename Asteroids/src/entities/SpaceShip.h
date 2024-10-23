@@ -16,7 +16,7 @@ namespace game
 {
 	namespace spaceship
 	{
-		const int maxBullets = 25;
+		const int maxBullets = 500;
 
 		struct SpaceShip
 		{

@@ -16,16 +16,16 @@ namespace game
 		Vector2 GetResolution()
 		{
 			Vector2 res;
-			res.x = GetScreenWidth();
-			res.y = GetScreenHeight();
+			res.x = static_cast<float>(GetScreenWidth());
+			res.y = static_cast<float>(GetScreenHeight());
 
 			return res;
 		}
 
 		Vector2 GetScale()
 		{
-			float screenW = GetScreenWidth();
-			float screenH = GetScreenHeight();
+			float screenW = static_cast<float>(GetScreenWidth());
+			float screenH = static_cast<float>(GetScreenHeight());
 
 			Vector2 scale;
 			scale.x = screenW / defaultWidth;
@@ -36,8 +36,8 @@ namespace game
 
 		float GetScalef()
 		{
-			float screenW = GetScreenWidth();
-			float screenH = GetScreenHeight();
+			float screenW = static_cast<float>(GetScreenWidth());
+			float screenH = static_cast<float>(GetScreenHeight());
 
 			Vector2 scale;
 			scale.x = screenW / defaultWidth;
@@ -48,12 +48,12 @@ namespace game
 			return prom;
 		}
 
-		void SetResolution(Vector2 res)
+		void SetResolution(int width, int height)
 		{
-			currentWidth = res.x;
-			currentHeight = res.y;
+			currentWidth = width;
+			currentHeight = height;
 
-			SetWindowSize(res.x, res.y);
+			SetWindowSize(width, height);
 		}
 	}
 }

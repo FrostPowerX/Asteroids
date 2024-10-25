@@ -88,7 +88,7 @@ namespace game
 
 		if (input::GetKey("res1"))
 		{
-			SetResolution(Vector2{ 800,600 });
+			SetResolution(800,600);
 			scenes::gameplay::Init();
 			scenes::controlls::Init();
 			scenes::credits::Init();
@@ -97,7 +97,7 @@ namespace game
 
 		if (input::GetKey("res2"))
 		{
-			SetResolution(Vector2{ 1024,768 });
+			SetResolution(1024,768);
 			scenes::gameplay::Init();
 			scenes::controlls::Init();
 			scenes::credits::Init();
@@ -106,7 +106,7 @@ namespace game
 
 		if (input::GetKey("res3"))
 		{
-			SetResolution(Vector2{ 1920,1080 });
+			SetResolution(1920,1080);
 			scenes::gameplay::Init();
 			scenes::controlls::Init();
 			scenes::credits::Init();

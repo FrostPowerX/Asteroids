@@ -42,8 +42,8 @@ namespace game
 
 			void CreatePlayer()
 			{
-				float screenWidth = GetScreenWidth();
-				float screenHeight = GetScreenHeight();
+				float screenWidth = static_cast<float>(GetScreenWidth());
+				float screenHeight = static_cast<float>(GetScreenHeight());
 
 				Rectangle dest{ 0,0,32,32 };
 

@@ -22,12 +22,13 @@ namespace game
 			if (sprites.size() <= 0)
 				return Sprite();
 
-			for (int i = 0; i < sprites.size(); i++)
+			for (int i = 0; i < static_cast<int>(sprites.size()); i++)
 			{
 				if(name == sprites[i]->name)
 					return *sprites[i];
 			}
 
+			return Sprite();
 		}
 
 		void LoadSprites()

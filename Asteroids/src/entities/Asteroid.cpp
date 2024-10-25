@@ -26,7 +26,7 @@ namespace game
 			dest.x = cir.x;
 			dest.y = cir.y;
 
-			newA.rotationAngle = GetRandomValue(0,360);
+			newA.rotationAngle = static_cast<float>(GetRandomValue(0,360));
 
 			newA.graphic.origin = Vector2{ (dest.width / 2), (dest.height / 2) };
 			newA.graphic.source = Rectangle{ 0,0,textureWidth,textureHeight };

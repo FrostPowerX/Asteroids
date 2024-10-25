@@ -15,7 +15,7 @@ namespace text
         newText.position.x = x;
         newText.position.y = y;
 
-        newText.font = font * GetScalef();
+        newText.font = static_cast<int>(font * GetScalef());
 
         newText.color = color;
 

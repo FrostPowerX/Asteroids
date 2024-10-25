@@ -57,7 +57,6 @@ namespace game
 			for (int i = 0; i < maxBullets; i++)
 			{
 				Rectangle rect = Rectangle{ 0,0,16,16 };
-				Circle cir = ship.body;
 				cir.radius = 5;
 
 				ship.bullets[i] = bullet::Create(cir, rect, "PlayerShip", Vector2{ 0,0 });
@@ -68,7 +67,7 @@ namespace game
 
 		void TakeDamage(SpaceShip& sp)
 		{
-
+			sp.body;
 		}
 
 		void Update(SpaceShip& sp)

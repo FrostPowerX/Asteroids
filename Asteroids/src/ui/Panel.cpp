@@ -22,7 +22,7 @@ namespace panel
         newP.minOffSetY = minOffSetY;
         newP.maxOffSetY = maxOffSetY;
 
-        newP.fontSizeText = fontSize * GetScalef();
+        newP.fontSizeText = static_cast<int>(fontSize * GetScalef());
 
         newP.rectColor = rectColor;
         newP.textColor = textColor;

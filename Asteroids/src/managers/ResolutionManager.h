@@ -18,6 +18,6 @@ namespace game
 		Vector2 GetScale();
 		float GetScalef();
 
-		void SetResolution(Vector2 res);
+		void SetResolution(int width, int height);
 	}
 }

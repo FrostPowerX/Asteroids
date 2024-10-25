@@ -15,7 +15,7 @@ namespace button
 		SetPosition(newB, position);
 
 		newB.text = text;
-		newB.fontSize = fontSize * GetScalef();
+		newB.fontSize = static_cast<int>(fontSize * GetScalef());
 		newB.textColor = textColor;
 
 		newB.normalColor = normal;
@@ -36,7 +36,7 @@ namespace button
 		SetPosition(newB, Vector2{ x,y });
 
 		newB.text = text;
-		newB.fontSize = fontSize * GetScalef();
+		newB.fontSize = static_cast<int>(fontSize * GetScalef());
 		newB.textColor = textColor;
 
 		newB.normalColor = normal;

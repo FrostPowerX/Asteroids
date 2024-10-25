@@ -1,6 +1,8 @@
 #include "GameLoop.h"
 
-void main()
+int main()
 {
 	game::Play();
+
+	return 0;
 }

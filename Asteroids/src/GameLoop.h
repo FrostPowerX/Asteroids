@@ -7,7 +7,7 @@ namespace game
 	enum class SCENE
 	{
 		GAMEPLAY,
-		CONTROLLS,
+		CONTROLS,
 		CREDITS,
 		EXIT,
 		MENU,

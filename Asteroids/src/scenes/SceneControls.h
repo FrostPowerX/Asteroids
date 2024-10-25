@@ -4,7 +4,7 @@ namespace game
 {
 	namespace scenes
 	{
-		namespace controlls
+		namespace controls
 		{
 			void Init();
 

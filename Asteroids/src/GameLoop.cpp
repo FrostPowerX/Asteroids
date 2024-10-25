@@ -3,7 +3,7 @@
 #include "raylib.h"
 
 #include "scenes/SceneGamePlay.h"
-#include "scenes/SceneControlls.h"
+#include "scenes/SceneControls.h"
 #include "scenes/SceneCredits.h"
 #include "scenes/SceneMenu.h"
 
@@ -60,7 +60,7 @@ namespace game
 		input::Init();
 		resolutionmanager::Init();
 		scenes::gameplay::Init();
-		scenes::controlls::Init();
+		scenes::controls::Init();
 		scenes::credits::Init();
 		scenes::menu::Init();
 	}
@@ -73,8 +73,8 @@ namespace game
 			scenes::gameplay::Input();
 			break;
 
-		case SCENE::CONTROLLS:
-			scenes::controlls::Input();
+		case SCENE::CONTROLS:
+			scenes::controls::Input();
 			break;
 
 		case SCENE::CREDITS:
@@ -90,7 +90,7 @@ namespace game
 		{
 			SetResolution(800,600);
 			scenes::gameplay::Init();
-			scenes::controlls::Init();
+			scenes::controls::Init();
 			scenes::credits::Init();
 			scenes::menu::Init();
 		}
@@ -99,7 +99,7 @@ namespace game
 		{
 			SetResolution(1024,768);
 			scenes::gameplay::Init();
-			scenes::controlls::Init();
+			scenes::controls::Init();
 			scenes::credits::Init();
 			scenes::menu::Init();
 		}
@@ -108,7 +108,7 @@ namespace game
 		{
 			SetResolution(1920,1080);
 			scenes::gameplay::Init();
-			scenes::controlls::Init();
+			scenes::controls::Init();
 			scenes::credits::Init();
 			scenes::menu::Init();
 		}
@@ -122,8 +122,8 @@ namespace game
 			scenes::gameplay::Update();
 			break;
 
-		case SCENE::CONTROLLS:
-			scenes::controlls::Update();
+		case SCENE::CONTROLS:
+			scenes::controls::Update();
 			break;
 
 		case SCENE::CREDITS:
@@ -146,8 +146,8 @@ namespace game
 			case game::SCENE::GAMEPLAY:
 				scenes::gameplay::Init();
 				break;
-			case game::SCENE::CONTROLLS:
-				scenes::controlls::Init();
+			case game::SCENE::CONTROLS:
+				scenes::controls::Init();
 				break;
 			case game::SCENE::CREDITS:
 				scenes::credits::Init();
@@ -168,8 +168,8 @@ namespace game
 			scenes::gameplay::Draw();
 			break;
 
-		case SCENE::CONTROLLS:
-			scenes::controlls::Draw();
+		case SCENE::CONTROLS:
+			scenes::controls::Draw();
 			break;
 
 		case SCENE::CREDITS:

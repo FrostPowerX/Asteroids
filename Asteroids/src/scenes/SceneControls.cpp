@@ -1,4 +1,4 @@
-#include "SceneControlls.h"
+#include "SceneControls.h"
 
 #include "GameLoop.h"
 
@@ -8,7 +8,7 @@ namespace game
 {
 	namespace scenes
 	{
-		namespace controlls
+		namespace controls
 		{
 
 

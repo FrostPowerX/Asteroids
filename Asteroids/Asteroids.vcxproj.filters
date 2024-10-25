@@ -27,7 +27,7 @@
     <ClCompile Include="src\scenes\SceneCredits.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="src\scenes\SceneControlls.cpp">
+    <ClCompile Include="src\scenes\SceneControls.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="src\managers\SpriteManager.cpp">
@@ -51,7 +51,9 @@
     <ClCompile Include="src\entities\Asteroid.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
-    <ClCompile Include="src\managers\AsteroidsManager.cpp" />
+    <ClCompile Include="src\managers\AsteroidsManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameLoop.h" />
@@ -85,7 +87,7 @@
     <ClInclude Include="src\managers\SpriteManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
-    <ClInclude Include="src\scenes\SceneControlls.h">
+    <ClInclude Include="src\scenes\SceneControls.h">
       <Filter>Scenes</Filter>
     </ClInclude>
     <ClInclude Include="src\scenes\SceneGamePlay.h">

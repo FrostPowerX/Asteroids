@@ -4,15 +4,20 @@
 
 namespace game
 {
+	using namespace asteroid;
+
 	namespace asteroidsmanager
 	{
+		const int maxAsteroids = 500;
+
 		void Init();
 
+		void Update();
+		void Draw();
 
-		void AddAsteroid(asteroid::Asteroid ast);
-		void Remove(asteroid::Asteroid ast);
+		void ActiveAsteroid();
+		void DeactiveAsteroid(int index);
 
-		void ActiveAsteroid(asteroid::Asteroid ast);
-		void DeactiveAsteroid(asteroid::Asteroid ast);
+		Asteroid& GetAsteroid(int index);
 	}
 }

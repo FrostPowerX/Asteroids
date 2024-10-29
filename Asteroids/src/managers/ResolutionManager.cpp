@@ -4,8 +4,8 @@ namespace game
 {
 	namespace resolutionmanager
 	{
-		int currentWidth;
-		int currentHeight;
+		int currentWidth = 1024;
+		int currentHeight = 768;
 
 		void Init()
 		{

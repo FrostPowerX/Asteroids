@@ -39,4 +39,6 @@ namespace bullet
 
 	void SetTarget(Bullet& bullet, Vector2 target);
 	void Shoot(Bullet& bullet, Vector2 position, Vector2 target);
+
+	void OnCollision(Bullet& bullet);
 }

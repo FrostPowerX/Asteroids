@@ -36,7 +36,7 @@ namespace bullet
 
 		newB.isAlive = isAlive;
 
-		newB.graphic.spriteSheet = GetSprite(textureName).texture;
+		newB.graphic.sprite = GetSprite(textureName)->texture;
 
 		SetTarget(newB, target);
 
@@ -69,8 +69,11 @@ namespace bullet
 		if (!bullet.isAlive)
 			return;
 
+#ifdef _DEBUG
 		DrawCircleLines(static_cast<int>(bullet.body.x), static_cast<int>(bullet.body.y), bullet.body.radius, RED);
-		DrawTexturePro(bullet.graphic.spriteSheet, bullet.graphic.source, bullet.graphic.dest, bullet.graphic.origin, bullet.rotationAngle + 90, WHITE);
+#endif // _DEBUG
+
+		DrawTexturePro(bullet.graphic.sprite, bullet.graphic.source, bullet.graphic.dest, bullet.graphic.origin, bullet.rotationAngle + 90, WHITE);
 	}
 
 	void SetTarget(Bullet& bullet, Vector2 target)
@@ -112,6 +115,10 @@ namespace bullet
 
 		bullet.timeAlive = bullet.resetTime;
 		bullet.isAlive = true;
+	}
+	void OnCollision(Bullet& bullet)
+	{
+		bullet.isAlive = false;
 	}
 }
 

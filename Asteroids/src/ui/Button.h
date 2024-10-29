@@ -4,6 +4,8 @@
 
 #include "raylib.h"
 
+#include "Text.h"
+
 namespace button
 {
 
@@ -15,17 +17,11 @@ namespace button
 	{
 		Rectangle rect;
 
-		std::string text;
-
-		Vector2 textPosition;
+		text::Text text;
 
 		Color normalColor;
 		Color onMouseTopColor;
 		Color pressedColor;
-
-		Color textColor;
-
-		int fontSize;
 
 		bool isPressed;
 		bool isReleased;

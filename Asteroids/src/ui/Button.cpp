@@ -10,17 +10,24 @@ namespace button
 	{
 		Button newB;
 
+		position.x *= GetScale().x;
+		position.y *= GetScale().y;
+
 		newB.rect.width = width * GetScale().x;
 		newB.rect.height = height * GetScale().y;
 		SetPosition(newB, position);
 
-		newB.text = text;
-		newB.fontSize = static_cast<int>(fontSize * GetScalef());
-		newB.textColor = textColor;
+		newB.text.text = text;
+		newB.text.font = static_cast<int>(fontSize * GetScalef());
+		newB.text.color = textColor;
 
 		newB.normalColor = normal;
 		newB.onMouseTopColor = onTop;
 		newB.pressedColor = pressed;
+
+		newB.isMouseOnTop = false;
+		newB.isPressed = false;
+		newB.isReleased = false;
 
 		SetText(newB, text);
 
@@ -31,17 +38,24 @@ namespace button
 	{
 		Button newB;
 
+		x *= GetScale().x;
+		y *= GetScale().y;
+
 		newB.rect.width = width * GetScale().x;
 		newB.rect.height = height * GetScale().y;
 		SetPosition(newB, Vector2{ x,y });
 
-		newB.text = text;
-		newB.fontSize = static_cast<int>(fontSize * GetScalef());
-		newB.textColor = textColor;
+		newB.text.text = text;
+		newB.text.font = static_cast<int>(fontSize * GetScalef());
+		newB.text.color = textColor;
 
 		newB.normalColor = normal;
 		newB.onMouseTopColor = onTop;
 		newB.pressedColor = pressed;
+
+		newB.isMouseOnTop = false;
+		newB.isPressed = false;
+		newB.isReleased = false;
 
 		SetText(newB, text);
 
@@ -115,8 +129,8 @@ namespace button
 
 	void SetText(Button& button, std::string text)
 	{
-		button.textPosition.x = button.rect.x + (button.rect.width / 2) - (MeasureText(button.text.c_str(), button.fontSize) / 2);
-		button.textPosition.y = button.rect.y + (button.rect.height / 2) - (button.fontSize / 2);
+		button.text.position.x = button.rect.x + (button.rect.width / 2) - (MeasureText(button.text.text.c_str(), button.text.font) / 2);
+		button.text.position.y = button.rect.y + (button.rect.height / 2) - (button.text.font / 2);
 	}
 
 	void Draw(Button button)
@@ -136,7 +150,7 @@ namespace button
 
 		DrawRectangleRec(button.rect, usedColor);
 
-		DrawText(button.text.c_str(), static_cast<int>(button.textPosition.x), static_cast<int>(button.textPosition.y), button.fontSize, button.textColor);
+		text::Draw(button.text);
 	}
 }
 

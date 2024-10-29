@@ -4,6 +4,8 @@
 
 #include "raylib.h"
 
+#include "Text.h"
+
 using namespace std;
 
 namespace panel
@@ -12,9 +14,7 @@ namespace panel
 	{
 		Rectangle rect;
 
-		string text;
-
-		Vector2 textPosition;
+		text::Text text;
 
 		float minOffSetX = 0;
 		float maxOffSetX = 0;
@@ -22,10 +22,7 @@ namespace panel
 		float minOffSetY = 0;
 		float maxOffSetY = 0;
 
-		int fontSizeText = 0;
-
 		Color rectColor = WHITE;
-		Color textColor = WHITE;
 	};
 
 	Panel Create(Rectangle rect, string text, float minOffSetX, float maxOffSetX, float minOffSetY, float maxOffSetY, int fontSize, Color rectColor, Color textColor);

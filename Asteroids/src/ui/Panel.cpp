@@ -14,7 +14,7 @@ namespace panel
         rect.height *= GetScale().y;
 
         newP.rect = rect;
-        newP.text = text;
+        newP.text.text = text;
 
         newP.minOffSetX = minOffSetX;
         newP.maxOffSetX = maxOffSetX;
@@ -22,19 +22,19 @@ namespace panel
         newP.minOffSetY = minOffSetY;
         newP.maxOffSetY = maxOffSetY;
 
-        newP.fontSizeText = static_cast<int>(fontSize * GetScalef());
+        newP.text.font = static_cast<int>(fontSize * GetScalef());
 
         newP.rectColor = rectColor;
-        newP.textColor = textColor;
+        newP.text.color = textColor;
 
-        newP.rect.width = newP.minOffSetX + newP.maxOffSetX + MeasureText(newP.text.c_str(), newP.fontSizeText);
-        newP.rect.height = newP.minOffSetY + newP.maxOffSetY + newP.fontSizeText;
+        newP.rect.width = newP.minOffSetX + newP.maxOffSetX + MeasureText(newP.text.text.c_str(), newP.text.font);
+        newP.rect.height = newP.minOffSetY + newP.maxOffSetY + newP.text.font;
 
         newP.rect.x = newP.rect.x - (newP.rect.width / 2);
         newP.rect.y = newP.rect.y - (newP.rect.height / 2);
 
-        newP.textPosition.x = newP.rect.x + newP.minOffSetX;
-        newP.textPosition.y = newP.rect.y + newP.minOffSetY;
+        newP.text.position.x = newP.rect.x + newP.minOffSetX;
+        newP.text.position.y = newP.rect.y + newP.minOffSetY;
 
         return newP;
     }
@@ -47,23 +47,23 @@ namespace panel
         panel.rect.x = panel.rect.x - (panel.rect.width / 2);
         panel.rect.y = panel.rect.y - (panel.rect.height / 2);
 
-        SetText(panel, panel.text);
+        SetText(panel, panel.text.text);
     }
 
     void SetText(Panel& panel, string text)
     {
-        panel.text = text;
+        panel.text.text = text;
 
-        panel.rect.width = panel.minOffSetX + panel.maxOffSetX + MeasureText(panel.text.c_str(), panel.fontSizeText);
-        panel.rect.height = panel.minOffSetY + panel.maxOffSetY + panel.fontSizeText;
+        panel.rect.width = panel.minOffSetX + panel.maxOffSetX + MeasureText(panel.text.text.c_str(), panel.text.font);
+        panel.rect.height = panel.minOffSetY + panel.maxOffSetY + panel.text.font;
 
-        panel.textPosition.x = panel.rect.x + panel.minOffSetX;
-        panel.textPosition.y = panel.rect.y + panel.minOffSetY;
+        panel.text.position.x = panel.rect.x + panel.minOffSetX;
+        panel.text.position.y = panel.rect.y + panel.minOffSetY;
     }
 
     void SetColorText(Panel& panel, Color color)
     {
-        panel.textColor = color;
+        panel.text.color = color;
     }
 
     void SetBackGroundColor(Panel& panel, Color color)
@@ -75,7 +75,7 @@ namespace panel
     {
         DrawRectangleRec(panel.rect, panel.rectColor);
 
-        DrawText(panel.text.c_str(), static_cast<int>(panel.textPosition.x), static_cast<int>(panel.textPosition.y), panel.fontSizeText, panel.textColor);
+        text::Draw(panel.text);
     }
 }
 

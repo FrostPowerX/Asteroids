@@ -76,7 +76,7 @@ bool CheckCollision(Circle c, Rectangle r)
 	return (distance < c.radius);
 }
 
-bool CheckBorderCollision(Circle c, float maxWidth, float minWidth, float maxHeight, float minHeight)
+bool CheckBorderCollision(Circle c, int maxWidth, int minWidth, int maxHeight, int minHeight)
 {
 	if (c.y >= maxHeight - c.radius || c.y <= minHeight + c.radius)
 		return true;
@@ -87,7 +87,7 @@ bool CheckBorderCollision(Circle c, float maxWidth, float minWidth, float maxHei
 	return false;
 }
 
-bool CheckBorderCollision(Rectangle rect, float maxWidth, float minWidth, float maxHeight, float minHeight)
+bool CheckBorderCollision(Rectangle rect, int maxWidth, int minWidth, int maxHeight, int minHeight)
 {
 	if (rect.y >= maxHeight - rect.height || rect.y <= minHeight)
 		return true;
@@ -248,101 +248,101 @@ TYPE_PENETRATION SolveCollision(Circle& entityA, Circle& entityB)
 }
 
 
-TYPE_PENETRATION SolveCollisionMap(Ball& entity, float maxWidth, float minWidth, float maxHeight, float minHeight)
-{
-	TYPE_PENETRATION typeOfPenetration = TYPE_PENETRATION::NONE;
+//TYPE_PENETRATION SolveCollisionMap(Ball& entity, int maxWidth, int minWidth, int maxHeight, int minHeight)
+//{
+//	TYPE_PENETRATION typeOfPenetration = TYPE_PENETRATION::NONE;
+//
+//	float minHorDistance = entity.cir.x - entity.cir.radius - minWidth;
+//	float maxHorDistance = entity.cir.x + entity.cir.radius;
+//
+//	float minVerDistance = entity.cir.y - entity.cir.radius - minHeight;
+//	float maxVerDistance = entity.cir.y + entity.cir.radius;
+//
+//	bool downHorPenetration = maxHorDistance > maxWidth - entity.cir.radius;
+//	bool upHorPenetration = minHorDistance < minWidth;
+//
+//	bool downVerPenetration = maxVerDistance >= maxHeight - entity.cir.radius;
+//	bool upVerPenetration = minVerDistance < minHeight;
+//
+//	Vector2 separation;
+//	separation.x = 0;
+//	separation.y = 0;
+//
+//	if (downHorPenetration)
+//		separation.x = maxHorDistance - maxWidth;
+//	else if (upHorPenetration)
+//		separation.x = minHorDistance;
+//
+//	if (downVerPenetration)
+//		separation.y = maxVerDistance - maxHeight;
+//	else if (upVerPenetration)
+//		separation.y = minVerDistance;
+//
+//	if (downVerPenetration || upVerPenetration)
+//	{
+//		typeOfPenetration = VERTICAL;
+//		entity.dirY *= -1.f;
+//	}
+//
+//	if (downHorPenetration || upHorPenetration)
+//	{
+//		typeOfPenetration = HORIZONTAL;
+//		entity.dirX *= -1.f;
+//	}
+//
+//	entity.cir.x -= separation.x;
+//	entity.cir.y -= separation.y;
+//
+//	return typeOfPenetration;
+//}
 
-	float minHorDistance = entity.cir.x - entity.cir.radius - minWidth;
-	float maxHorDistance = entity.cir.x + entity.cir.radius;
-
-	float minVerDistance = entity.cir.y - entity.cir.radius - minHeight;
-	float maxVerDistance = entity.cir.y + entity.cir.radius;
-
-	bool downHorPenetration = maxHorDistance > maxWidth - entity.cir.radius;
-	bool upHorPenetration = minHorDistance < minWidth;
-
-	bool downVerPenetration = maxVerDistance >= maxHeight - entity.cir.radius;
-	bool upVerPenetration = minVerDistance < minHeight;
-
-	Vector2 separation;
-	separation.x = 0;
-	separation.y = 0;
-
-	if (downHorPenetration)
-		separation.x = maxHorDistance - maxWidth;
-	else if (upHorPenetration)
-		separation.x = minHorDistance;
-
-	if (downVerPenetration)
-		separation.y = maxVerDistance - maxHeight;
-	else if (upVerPenetration)
-		separation.y = minVerDistance;
-
-	if (downVerPenetration || upVerPenetration)
-	{
-		typeOfPenetration = VERTICAL;
-		entity.dirY *= -1.f;
-	}
-
-	if (downHorPenetration || upHorPenetration)
-	{
-		typeOfPenetration = HORIZONTAL;
-		entity.dirX *= -1.f;
-	}
-
-	entity.cir.x -= separation.x;
-	entity.cir.y -= separation.y;
-
-	return typeOfPenetration;
-}
-
-TYPE_PENETRATION SolveCollisionMap(Rectangle& entity, float maxWidth, float minWidth, float maxHeight, float minHeight)
-{
-	TYPE_PENETRATION typeOfPenetration = TYPE_PENETRATION::NONE;
-
-	float halfWidth = (entity.width / 2);
-	float halfHeight = (entity.height / 2);
-
-	float entityCenteredPosX = entity.x + halfWidth;
-	float entityCenteredPosY = entity.y + halfHeight;
-
-	float minHorDistance = entityCenteredPosX - halfWidth - minWidth;
-	float maxHorDistance = entityCenteredPosX + halfWidth;
-
-	float minVerDistance = entityCenteredPosY - halfHeight - minHeight;
-	float maxVerDistance = entityCenteredPosY + halfHeight;
-
-	bool downHorPenetration = maxHorDistance > maxWidth - halfWidth;
-	bool upHorPenetration = minHorDistance < minWidth;
-
-	bool downVerPenetration = maxVerDistance > maxHeight - halfHeight;
-	bool upVerPenetration = minVerDistance < minHeight;
-
-	Vector2 separation;
-	separation.x = 0;
-	separation.y = 0;
-
-	if (downHorPenetration)
-		separation.x = maxHorDistance - minWidth;
-	else if (upHorPenetration)
-		separation.x = minHorDistance;
-
-	if (downVerPenetration)
-		separation.y = maxVerDistance - maxHeight;
-	else if (upVerPenetration)
-		separation.y = minVerDistance;
-
-	if (downVerPenetration || upVerPenetration)
-		typeOfPenetration = VERTICAL;
-
-	if (downHorPenetration || upHorPenetration)
-		typeOfPenetration = HORIZONTAL;
-
-	entity.x -= separation.x;
-	entity.y -= separation.y;
-
-	return typeOfPenetration;
-}
+//TYPE_PENETRATION SolveCollisionMap(Rectangle& entity, int maxWidth, int minWidth, int maxHeight, int minHeight)
+//{
+//	TYPE_PENETRATION typeOfPenetration = TYPE_PENETRATION::NONE;
+//
+//	float halfWidth = (entity.width / 2);
+//	float halfHeight = (entity.height / 2);
+//
+//	float entityCenteredPosX = entity.x + halfWidth;
+//	float entityCenteredPosY = entity.y + halfHeight;
+//
+//	float minHorDistance = entityCenteredPosX - halfWidth - minWidth;
+//	float maxHorDistance = entityCenteredPosX + halfWidth;
+//
+//	float minVerDistance = entityCenteredPosY - halfHeight - minHeight;
+//	float maxVerDistance = entityCenteredPosY + halfHeight;
+//
+//	bool downHorPenetration = maxHorDistance > maxWidth - halfWidth;
+//	bool upHorPenetration = minHorDistance < minWidth;
+//
+//	bool downVerPenetration = maxVerDistance > maxHeight - halfHeight;
+//	bool upVerPenetration = minVerDistance < minHeight;
+//
+//	Vector2 separation;
+//	separation.x = 0;
+//	separation.y = 0;
+//
+//	if (downHorPenetration)
+//		separation.x = maxHorDistance - minWidth;
+//	else if (upHorPenetration)
+//		separation.x = minHorDistance;
+//
+//	if (downVerPenetration)
+//		separation.y = maxVerDistance - maxHeight;
+//	else if (upVerPenetration)
+//		separation.y = minVerDistance;
+//
+//	if (downVerPenetration || upVerPenetration)
+//		typeOfPenetration = VERTICAL;
+//
+//	if (downHorPenetration || upHorPenetration)
+//		typeOfPenetration = HORIZONTAL;
+//
+//	entity.x -= separation.x;
+//	entity.y -= separation.y;
+//
+//	return typeOfPenetration;
+//}
 
 Vector2 NormalizeVector(Vector2 vector)
 {
@@ -380,52 +380,52 @@ double RadiansToGrades(double r)
 	return r * (180.0 / PI);
 }
 
-void BouncingAngle(Ball& ball, Rectangle& rect)
-{
-	float maxBounceAngle = 70.0f * (PI / 180.0f);
+//void BouncingAngle(Ball& ball, Rectangle& rect)
+//{
+//	float maxBounceAngle = 70.0f * (PI / 180.0f);
+//
+//	float intersectPointX = ball.cir.x - (rect.x + rect.width / 2);
+//	float intersectPointY = ball.cir.y - (rect.y + rect.height / 2);
+//
+//	float relativePointX = intersectPointX / (rect.width / 2);
+//	float relativePointY = intersectPointY / (rect.height / 2);
+//
+//	float bounceAngle = relativePointY * maxBounceAngle;
+//
+//	if (fabs(intersectPointY) > 1.f)
+//	{
+//		ball.dirX = relativePointX * cos(bounceAngle);
+//		ball.dirY = sin(bounceAngle);
+//	}
+//	else
+//	{
+//		ball.dirX = (ball.dirX > 0) ? 1.0f : -1.0f;
+//		ball.dirY = 0;
+//	}
+//
+//	NormalizeVector(ball.dirX, ball.dirY);
+//}
 
-	float intersectPointX = ball.cir.x - (rect.x + rect.width / 2);
-	float intersectPointY = ball.cir.y - (rect.y + rect.height / 2);
-
-	float relativePointX = intersectPointX / (rect.width / 2);
-	float relativePointY = intersectPointY / (rect.height / 2);
-
-	float bounceAngle = relativePointY * maxBounceAngle;
-
-	if (fabs(intersectPointY) > 1.f)
-	{
-		ball.dirX = relativePointX * cos(bounceAngle);
-		ball.dirY = sin(bounceAngle);
-	}
-	else
-	{
-		ball.dirX = (ball.dirX > 0) ? 1.0f : -1.0f;
-		ball.dirY = 0;
-	}
-
-	NormalizeVector(ball.dirX, ball.dirY);
-}
-
-void BouncingBalls(Ball& b1, Ball& b2)
-{
-	Vector2 normalCol;
-
-	normalCol.x = b1.cir.x - b2.cir.x;
-	normalCol.y = b1.cir.y - b2.cir.y;
-	NormalizeVector(normalCol.x, normalCol.y);
-
-	Vector2 relativeDir;
-	relativeDir.x = b1.dirX - b2.dirX;
-	relativeDir.y = b1.dirY - b2.dirY;
-
-	float dirNormalized = relativeDir.x * normalCol.x + relativeDir.y * normalCol.y;
-
-	if (dirNormalized > 0)
-		return;
-
-	b1.dirX = b1.dirX - normalCol.x * dirNormalized;
-	b1.dirY = b1.dirY - normalCol.y * dirNormalized;
-
-	b2.dirX = b2.dirX + normalCol.x * dirNormalized;
-	b2.dirY = b2.dirY + normalCol.y * dirNormalized;
-}
+//void BouncingBalls(Ball& b1, Ball& b2)
+//{
+//	Vector2 normalCol;
+//
+//	normalCol.x = b1.cir.x - b2.cir.x;
+//	normalCol.y = b1.cir.y - b2.cir.y;
+//	NormalizeVector(normalCol.x, normalCol.y);
+//
+//	Vector2 relativeDir;
+//	relativeDir.x = b1.dirX - b2.dirX;
+//	relativeDir.y = b1.dirY - b2.dirY;
+//
+//	float dirNormalized = relativeDir.x * normalCol.x + relativeDir.y * normalCol.y;
+//
+//	if (dirNormalized > 0)
+//		return;
+//
+//	b1.dirX = b1.dirX - normalCol.x * dirNormalized;
+//	b1.dirY = b1.dirY - normalCol.y * dirNormalized;
+//
+//	b2.dirX = b2.dirX + normalCol.x * dirNormalized;
+//	b2.dirY = b2.dirY + normalCol.y * dirNormalized;
+//}

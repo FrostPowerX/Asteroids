@@ -33,6 +33,7 @@ namespace game
 			AddKey(MOUSE_BUTTON_RIGHT, "Move", true);
 			AddKey(MOUSE_BUTTON_LEFT, "Shoot", true);
 			AddKey(KEY_ESCAPE, "Back");
+			AddKey(KEY_R, "TripleShoot");
 			AddKey(KEY_A, "res1");
 			AddKey(KEY_S, "res2");
 			AddKey(KEY_D, "res3");

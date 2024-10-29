@@ -12,8 +12,8 @@ namespace text
 
         newText.text = text;
 
-        newText.position.x = x;
-        newText.position.y = y;
+        newText.position.x = x - (MeasureText(text.c_str(), font) / 2.f);
+        newText.position.y = y + font / 2.f;
 
         newText.font = static_cast<int>(font * GetScalef());
 

@@ -40,10 +40,11 @@ namespace game
 
 			int lives;
 
+			bool tripleShoot;
 			bool isAlive;
 		};
 
-		SpaceShip Create(Circle cir, Rectangle dest, std::string textureName, float speed, float maxSpeed, float invencibleT = 3.0f, float reloadTime = 0.2f, int lives = 3, bool isAlive = true);
+		SpaceShip Create(Circle cir, Rectangle dest, std::string textureName, float speed, float maxSpeed, float invencibleT = 3.0f, float reloadTime = 0.4f, int lives = 3, bool isAlive = true);
 
 		void TakeDamage(SpaceShip& sp);
 

@@ -6,13 +6,19 @@ namespace game
 	{
 		std::vector<Sprite*> sprites;
 
-		void AddSprite(std::string name, std::string path);
+		void AddSprite(std::string name, std::string path, bool reescale = true);
 
-		void AddSprite(std::string name, std::string path)
+		void AddSprite(std::string name, std::string path, bool reescale)
 		{
 			Sprite* newSp = new Sprite();
 			newSp->name = name;
 			newSp->texture = LoadTexture(path.c_str());
+
+			if (reescale)
+			{
+				newSp->texture.width = 32;
+				newSp->texture.height = 32;
+			}
 
 			sprites.push_back(newSp);
 		}
@@ -33,8 +39,17 @@ namespace game
 
 		void LoadSprites()
 		{
+			AddSprite("BackGround", "res/BackGround.png");
 			AddSprite("PlayerShip", "res/SpaceShip.png");
+			AddSprite("Cursor", "res/Cursor.png");
 			AddSprite("Asteroid", "res/Asteroid.png");
+			AddSprite("Bullet", "res/Bullet.png");
+			AddSprite("Enemy", "res/Enemy.png");
+			AddSprite("Button", "res/Button.png", false);
+			AddSprite("Panel", "res/Panel.png", false);
+			AddSprite("ScoreBoard", "res/ScoreBoard.png", false);
+			AddSprite("LinkButton", "res/LinkButton.png", false);
+			AddSprite("CheckButton", "res/CheckButton.png", false);
 		}
 
 		void UnloadSprites()

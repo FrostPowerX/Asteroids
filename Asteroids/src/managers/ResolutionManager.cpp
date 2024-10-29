@@ -54,6 +54,7 @@ namespace game
 			currentHeight = height;
 
 			SetWindowSize(width, height);
+			SetWindowPosition(GetMonitorWidth(0) / 2 - (currentWidth / 2), GetMonitorHeight(0) / 2 - (currentHeight / 2));
 		}
 	}
 }

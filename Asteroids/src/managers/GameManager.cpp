@@ -11,8 +11,8 @@ namespace game
 		{
 			if (actualScore > maxScore)
 				maxScore = actualScore;
-			else
-				actualScore = 0;
+
+			actualScore = 0;
 		}
 
 		void AddScore(int score)

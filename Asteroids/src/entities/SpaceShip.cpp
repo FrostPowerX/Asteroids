@@ -14,9 +14,9 @@ namespace game
 	{
 		void Move(SpaceShip& sp, Vector2 target);
 		void Rotate(SpaceShip& sp, Vector2 target);
-		void Shoot(SpaceShip& sp);
+		void Shoot(SpaceShip& sp, bool isTriple = false);
 
-		void ActiveBullet(SpaceShip& sp);
+		void ActiveBullet(SpaceShip& sp, bool tripleShoot = false);
 
 		void ActualizePos(SpaceShip& sp);
 		void NormalizeVelocity(SpaceShip& sp);
@@ -53,6 +53,7 @@ namespace game
 
 			ship.lives = lives;
 
+			ship.tripleShoot = false;
 			ship.isAlive = isAlive;
 
 			ship.graphic.sprite = spritemanager::GetSprite(textureName)->texture;
@@ -62,9 +63,8 @@ namespace game
 				Rectangle rect = Rectangle{ 0,0,16,16 };
 				cir.radius = 5;
 
-				ship.bullets[i] = bullet::Create(cir, rect, "PlayerShip", Vector2{ 0,0 });
+				ship.bullets[i] = bullet::Create(cir, rect, "Bullet", Vector2{ 0,0 });
 			}
-
 			return ship;
 		}
 
@@ -93,7 +93,7 @@ namespace game
 			Rotate(sp, GetMousePosition());
 
 			if (input::GetKeyDown("Shoot") && sp.reloadTime <= 0)
-				Shoot(sp);
+				Shoot(sp, sp.tripleShoot);
 
 			if (input::GetKeyDown("Move"))
 				Move(sp, GetMousePosition());
@@ -166,23 +166,52 @@ namespace game
 
 			sp.rotationAngle = angle;
 		}
-		void Shoot(SpaceShip& sp)
+		void Shoot(SpaceShip& sp, bool isTriple)
 		{
-			ActiveBullet(sp);
+			ActiveBullet(sp, isTriple);
 
 			sp.reloadTime = sp.resetTime;
 		}
 
-		void ActiveBullet(SpaceShip& sp)
+		void ActiveBullet(SpaceShip& sp, bool tripleShoot)
 		{
-			for (int i = 0; i < maxBullets; i++)
+			if (tripleShoot)
 			{
-				if (!sp.bullets[i].isAlive)
+				const int maxSBull = 3;
+				int count = 0;
+
+				bullet::Bullet* bullets[maxSBull] = { nullptr,nullptr ,nullptr };
+
+				for (int i = 0; i < maxBullets; i++)
 				{
-					bullet::Shoot(sp.bullets[i], Vector2{ sp.body.x,sp.body.y }, GetMousePosition());
-					break;
+					if (!sp.bullets[i].isAlive)
+					{
+						bullets[count] = &sp.bullets[i];
+
+						count++;
+						if (count >= maxSBull)
+							break;
+					}
 				}
+
+				if (bullets[0] != nullptr)
+					bullet::Shoot(*bullets[0], Vector2{ sp.body.x,sp.body.y }, GetMousePosition());
+
+				if (bullets[1] != nullptr)
+					bullet::Shoot(*bullets[1], Vector2{ sp.body.x,sp.body.y }, GetMousePosition(), 22.5f);
+
+				if (bullets[2] != nullptr)
+					bullet::Shoot(*bullets[2], Vector2{ sp.body.x,sp.body.y }, GetMousePosition(), -22.5f);
 			}
+			else
+				for (int i = 0; i < maxBullets; i++)
+				{
+					if (!sp.bullets[i].isAlive)
+					{
+						bullet::Shoot(sp.bullets[i], Vector2{ sp.body.x,sp.body.y }, GetMousePosition());
+						break;
+					}
+				}
 		}
 
 		void ActualizePos(SpaceShip& sp)

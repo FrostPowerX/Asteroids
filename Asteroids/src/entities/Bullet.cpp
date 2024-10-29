@@ -90,7 +90,7 @@ namespace bullet
 		bullet.dir = dir;
 	}
 
-	void Shoot(Bullet& bullet, Vector2 position, Vector2 target)
+	void Shoot(Bullet& bullet, Vector2 position, Vector2 target, float addAngle)
 	{
 		bullet.body.x = position.x;
 		bullet.body.y = position.y;
@@ -102,6 +102,8 @@ namespace bullet
 
 		float angle = atan(y / x);
 
+		float r = sqrt(x * x + y * y);
+
 		angle = static_cast<float>(RadiansToGrades(angle));
 
 		if (x < 0 && y > 0)
@@ -111,7 +113,29 @@ namespace bullet
 		else if (x > 0 && y < 0)
 			angle += 360;
 
-		bullet.rotationAngle = angle;
+		bullet.rotationAngle = angle + addAngle;
+
+		if (addAngle != 0)
+		{
+			bullet.rotationAngle += (bullet.rotationAngle >= 360) ? -360 : 0;
+			bullet.rotationAngle += (bullet.rotationAngle < 0) ? 360 : 0;
+
+			float angleNew = static_cast<float>(GradesToRadians(bullet.rotationAngle));
+
+			x = r * cos(angleNew);
+			y = r * sin(angleNew);
+
+			bullet.rotationAngle = static_cast<float>(RadiansToGrades(atan(y / x)));
+
+			if (x < 0 && y > 0)
+				bullet.rotationAngle += 180;
+			else if (x < 0 && y <= 0)
+				bullet.rotationAngle += 180;
+			else if (x > 0 && y < 0)
+				bullet.rotationAngle += 360;
+
+			SetTarget(bullet, Vector2{ bullet.body.x + x , bullet.body.y + y });
+		}
 
 		bullet.timeAlive = bullet.resetTime;
 		bullet.isAlive = true;

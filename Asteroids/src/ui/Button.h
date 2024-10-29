@@ -4,32 +4,30 @@
 
 #include "raylib.h"
 
+#include "managers/SpriteManager.h"
+
 #include "Text.h"
+
+using namespace game::spritemanager;
 
 namespace button
 {
-
-	const float ButtonWidth = 120;
-	const float ButtonHeight = 40;
-	const int ButtonFont = 10;
+	const float ButtonWidth = 180;
+	const float ButtonHeight = 80;
+	const int ButtonFont = 20;
 
 	struct Button
 	{
-		Rectangle rect;
-
 		text::Text text;
 
-		Color normalColor;
-		Color onMouseTopColor;
-		Color pressedColor;
+		Graphic graph;
 
 		bool isPressed;
 		bool isReleased;
 		bool isMouseOnTop;
 	};
 
-	Button Create(std::string text, Vector2 position, float width = ButtonWidth, float height = ButtonHeight, int fontSize = ButtonFont, Color textColor = BLACK, Color normal = WHITE, Color onTop = GRAY, Color pressed = DARKGRAY);
-	Button Create(std::string text, float x, float y, float width = ButtonWidth, float height = ButtonHeight, int fontSize = ButtonFont, Color textColor = BLACK, Color normal = WHITE, Color onTop = GRAY, Color pressed = DARKGRAY);
+	Button Create(std::string spriteName, Rectangle dest = {0,0,ButtonWidth, ButtonHeight}, std::string text = "example", int fontSize = ButtonFont, Color textColor = BLACK);
 
 	Vector2 GetCenterPosition(Button);
 

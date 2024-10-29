@@ -10,12 +10,14 @@
 #include "managers/ResolutionManager.h"
 #include "managers/SpriteManager.h"
 #include "managers/InputManager.h"
+#include "managers/SpriteManager.h"
 
 using namespace game::resolutionmanager;
+using namespace game::spritemanager;
 
 namespace game
 {
-	const std::string GameName = "Asteroids";
+	const std::string GameName = "CAPSULE RIPER";
 
 	SCENE currentScene = SCENE::MENU;
 
@@ -52,6 +54,7 @@ namespace game
 		InitWindow(currentWidth, currentHeight, GameName.c_str());
 		SetExitKey(KEY_NULL);
 
+		HideCursor();
 
 		spritemanager::LoadSprites();
 
@@ -86,7 +89,7 @@ namespace game
 
 		if (input::GetKeyDown("res1"))
 		{
-			SetResolution(800,600);
+			SetResolution(800, 600);
 			scenes::gameplay::Init();
 			scenes::controls::Init();
 			scenes::credits::Init();
@@ -95,7 +98,7 @@ namespace game
 
 		if (input::GetKeyDown("res2"))
 		{
-			SetResolution(1024,768);
+			SetResolution(1024, 768);
 			scenes::gameplay::Init();
 			scenes::controls::Init();
 			scenes::credits::Init();
@@ -104,7 +107,7 @@ namespace game
 
 		if (input::GetKeyDown("res3"))
 		{
-			SetResolution(1920,1080);
+			SetResolution(1920, 1080);
 			scenes::gameplay::Init();
 			scenes::controls::Init();
 			scenes::credits::Init();
@@ -178,6 +181,37 @@ namespace game
 			scenes::menu::Draw();
 			break;
 		}
+
+		unsigned char r = static_cast<unsigned char>(GetRandomValue(0, 255));
+		unsigned char g = static_cast<unsigned char>(GetRandomValue(0, 255));
+		unsigned char b = static_cast<unsigned char>(GetRandomValue(0, 255));
+		unsigned char a = 255;
+
+		Color color;
+
+#ifdef _DEBUG
+		color = Color{ r,g,b,a };
+#else
+		color = RED;
+#endif // _DEBUG
+
+		DrawTexturePro(GetSprite("Cursor")->texture,
+			Rectangle {
+			0, 0, static_cast<float>(GetSprite("Cursor")->texture.width), static_cast<float>(GetSprite("Cursor")->texture.height / 2)
+		},
+			Rectangle{ GetMousePosition().x,GetMousePosition().y,textureWidth * 2,textureHeight * 2 },
+			Vector2{ 0,0 },
+			0,
+			WHITE);
+
+		DrawTexturePro(GetSprite("Cursor")->texture,
+			Rectangle {
+			0, 16, static_cast<float>(GetSprite("Cursor")->texture.width), static_cast<float>(GetSprite("Cursor")->texture.height / 2)
+		},
+			Rectangle{ GetMousePosition().x,GetMousePosition().y ,textureWidth * 2,textureHeight * 2 },
+			Vector2{ 0,0 },
+			0,
+			color);
 
 		EndDrawing();
 	}

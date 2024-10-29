@@ -31,14 +31,14 @@ namespace bullet
 		bool isAlive;
 	};
 
-	Bullet Create(Circle cir, Rectangle rect, std::string textureName, Vector2 target, float speed = 200.f, float timeAlive = 5.f, bool isAlive = false);
+	Bullet Create(Circle cir, Rectangle rect, std::string textureName, Vector2 target, float speed = 500.f, float timeAlive = 5.f, bool isAlive = false);
 
 
 	void Update(Bullet& bullet);
 	void Draw(Bullet bullet);
 
 	void SetTarget(Bullet& bullet, Vector2 target);
-	void Shoot(Bullet& bullet, Vector2 position, Vector2 target);
+	void Shoot(Bullet& bullet, Vector2 position, Vector2 target, float addAngle = 0);
 
 	void OnCollision(Bullet& bullet);
 }

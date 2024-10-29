@@ -6,14 +6,22 @@ using namespace game::resolutionmanager;
 
 namespace panel
 {
-    Panel Create(Rectangle rect, string text, float minOffSetX, float maxOffSetX, float minOffSetY, float maxOffSetY, int fontSize, Color rectColor, Color textColor)
+    Panel Create(string spriteName, Rectangle dest, string text, float minOffSetX, float maxOffSetX, float minOffSetY, float maxOffSetY, int fontSize, Color textColor)
     {
         Panel newP;
 
-        rect.width *= GetScale().x;
-        rect.height *= GetScale().y;
+        newP.graph.sprite = GetSprite(spriteName)->texture;
 
-        newP.rect = rect;
+        newP.graph.dest.x = dest.x * GetScale().x;
+        newP.graph.dest.y = dest.y * GetScale().y;
+
+        newP.graph.dest.width = dest.width * GetScale().x;
+        newP.graph.dest.height = dest.height * GetScale().y;
+        SetPosition(newP, Vector2{ dest.x, dest.y });
+
+        newP.graph.origin = Vector2{ 0, 0 };
+        newP.graph.source = Rectangle{ 0,0, static_cast<float>(newP.graph.sprite.width), static_cast<float>(newP.graph.sprite.height) };
+
         newP.text.text = text;
 
         newP.minOffSetX = minOffSetX;
@@ -24,28 +32,29 @@ namespace panel
 
         newP.text.font = static_cast<int>(fontSize * GetScalef());
 
-        newP.rectColor = rectColor;
         newP.text.color = textColor;
 
-        newP.rect.width = newP.minOffSetX + newP.maxOffSetX + MeasureText(newP.text.text.c_str(), newP.text.font);
-        newP.rect.height = newP.minOffSetY + newP.maxOffSetY + newP.text.font;
+        /*newP.graph.dest.width = newP.minOffSetX + newP.maxOffSetX + MeasureText(newP.text.text.c_str(), newP.text.font);
+        newP.graph.dest.height = newP.minOffSetY + newP.maxOffSetY + newP.text.font;*/
 
-        newP.rect.x = newP.rect.x - (newP.rect.width / 2);
-        newP.rect.y = newP.rect.y - (newP.rect.height / 2);
+ /*       newP.graph.dest.x = newP.graph.dest.x - (newP.graph.dest.width / 2);
+        newP.graph.dest.y = newP.graph.dest.y - (newP.graph.dest.height / 2);*/
 
-        newP.text.position.x = newP.rect.x + newP.minOffSetX;
-        newP.text.position.y = newP.rect.y + newP.minOffSetY;
+        newP.text.position.x = newP.graph.dest.x + newP.minOffSetX;
+        newP.text.position.y = newP.graph.dest.y + newP.minOffSetY;
+
+        SetText(newP, newP.text.text);
 
         return newP;
     }
 
     void SetPosition(Panel& panel, Vector2 newPos)
     {
-        panel.rect.x = newPos.x;
-        panel.rect.y = newPos.y;
+        panel.graph.dest.x = newPos.x;
+        panel.graph.dest.y = newPos.y;
 
-        panel.rect.x = panel.rect.x - (panel.rect.width / 2);
-        panel.rect.y = panel.rect.y - (panel.rect.height / 2);
+        panel.graph.dest.x = panel.graph.dest.x - (panel.graph.dest.width / 2);
+        panel.graph.dest.y = panel.graph.dest.y - (panel.graph.dest.height / 2);
 
         SetText(panel, panel.text.text);
     }
@@ -54,11 +63,8 @@ namespace panel
     {
         panel.text.text = text;
 
-        panel.rect.width = panel.minOffSetX + panel.maxOffSetX + MeasureText(panel.text.text.c_str(), panel.text.font);
-        panel.rect.height = panel.minOffSetY + panel.maxOffSetY + panel.text.font;
-
-        panel.text.position.x = panel.rect.x + panel.minOffSetX;
-        panel.text.position.y = panel.rect.y + panel.minOffSetY;
+        panel.text.position.x = panel.graph.dest.x + (panel.graph.dest.width / 2) - (MeasureText(panel.text.text.c_str(), panel.text.font) / 2);
+        panel.text.position.y = panel.graph.dest.y + (panel.graph.dest.height / 2) - (panel.text.font / 2);
     }
 
     void SetColorText(Panel& panel, Color color)
@@ -66,14 +72,9 @@ namespace panel
         panel.text.color = color;
     }
 
-    void SetBackGroundColor(Panel& panel, Color color)
-    {
-        panel.rectColor = color;
-    }
-
     void Draw(Panel panel)
     {
-        DrawRectangleRec(panel.rect, panel.rectColor);
+        DrawTexturePro(panel.graph.sprite, panel.graph.source, panel.graph.dest, panel.graph.origin, 0, WHITE);
 
         text::Draw(panel.text);
     }

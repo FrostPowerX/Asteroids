@@ -25,7 +25,7 @@ namespace game
 
 			void Init()
 			{
-				float offset = ButtonHeight * 2.f;
+				float offset = (ButtonHeight * 2.f) * GetScale().y;
 				float posx = currentWidth / 2.f;
 				float posy = offset;
 
@@ -36,7 +36,7 @@ namespace game
 
 				for (int i = 0; i < maxButtonsPMenu; i++)
 				{
-					buttons[i] = Create(bNames[i], posx, posy);
+					buttons[i] = Create("Button", Rectangle{ posx, posy, ButtonWidth, ButtonHeight }, bNames[i]);
 					
 					posy += offset;
 				}

@@ -6,52 +6,25 @@ using namespace game::resolutionmanager;
 
 namespace button
 {
-	Button Create(std::string text, Vector2 position, float width, float height, int fontSize, Color textColor, Color normal, Color onTop, Color pressed)
+	Button Create(std::string spriteName, Rectangle dest, std::string text, int fontSize, Color textColor)
 	{
 		Button newB;
 
-		position.x *= GetScale().x;
-		position.y *= GetScale().y;
+		newB.graph.sprite = GetSprite(spriteName)->texture;
 
-		newB.rect.width = width * GetScale().x;
-		newB.rect.height = height * GetScale().y;
-		SetPosition(newB, position);
+		newB.graph.dest.x = dest.x * GetScale().x;
+		newB.graph.dest.y = dest.y * GetScale().y;
+
+		newB.graph.dest.width = dest.width * GetScale().x;
+		newB.graph.dest.height = dest.height * GetScale().y;
+		SetPosition(newB, Vector2{ dest.x, dest.y });
+
+		newB.graph.origin = Vector2{ 0, 0 };
+		newB.graph.source = Rectangle{ 0,0, static_cast<float>(newB.graph.sprite.width), static_cast<float>(newB.graph.sprite.height / 4) };
 
 		newB.text.text = text;
 		newB.text.font = static_cast<int>(fontSize * GetScalef());
 		newB.text.color = textColor;
-
-		newB.normalColor = normal;
-		newB.onMouseTopColor = onTop;
-		newB.pressedColor = pressed;
-
-		newB.isMouseOnTop = false;
-		newB.isPressed = false;
-		newB.isReleased = false;
-
-		SetText(newB, text);
-
-		return newB;
-	}
-
-	Button Create(std::string text, float x, float y, float width, float height, int fontSize, Color textColor, Color normal, Color onTop, Color pressed)
-	{
-		Button newB;
-
-		x *= GetScale().x;
-		y *= GetScale().y;
-
-		newB.rect.width = width * GetScale().x;
-		newB.rect.height = height * GetScale().y;
-		SetPosition(newB, Vector2{ x,y });
-
-		newB.text.text = text;
-		newB.text.font = static_cast<int>(fontSize * GetScalef());
-		newB.text.color = textColor;
-
-		newB.normalColor = normal;
-		newB.onMouseTopColor = onTop;
-		newB.pressedColor = pressed;
 
 		newB.isMouseOnTop = false;
 		newB.isPressed = false;
@@ -66,27 +39,27 @@ namespace button
 	{
 		Vector2 centerPosition;
 
-		centerPosition.x = button.rect.x + (button.rect.width / 2);
-		centerPosition.y = button.rect.y + (button.rect.height / 2);
+		centerPosition.x = button.graph.dest.x + (button.graph.dest.width / 2);
+		centerPosition.y = button.graph.dest.y + (button.graph.dest.height / 2);
 
 		return centerPosition;
 	}
 
 	void SetPosition(Button& button, Vector2 newPosition)
 	{
-		button.rect.x = newPosition.x - (button.rect.width / 2);
-		button.rect.y = newPosition.y - (button.rect.height / 2);
+		button.graph.dest.x = newPosition.x - (button.graph.dest.width / 2);
+		button.graph.dest.y = newPosition.y - (button.graph.dest.height / 2);
 	}
 
 	bool MouseOnTop(Button& button)
 	{
 		Vector2 mousePosition = GetMousePosition();
 
-		float minValueX = button.rect.x;
-		float minValueY = button.rect.y;
+		float minValueX = button.graph.dest.x;
+		float minValueY = button.graph.dest.y;
 
-		float maxValueX = button.rect.x + button.rect.width;
-		float maxValueY = button.rect.y + button.rect.height;
+		float maxValueX = button.graph.dest.x + button.graph.dest.width;
+		float maxValueY = button.graph.dest.y + button.graph.dest.height;
 
 		bool onTopX = (mousePosition.x >= minValueX && mousePosition.x <= maxValueX);
 		bool onTopY = (mousePosition.y >= minValueY && mousePosition.y <= maxValueY);
@@ -118,8 +91,6 @@ namespace button
 				button.isPressed = true;
 			else
 				button.isPressed = false;
-
-
 		}
 		else
 			button.isPressed = false;
@@ -129,26 +100,30 @@ namespace button
 
 	void SetText(Button& button, std::string text)
 	{
-		button.text.position.x = button.rect.x + (button.rect.width / 2) - (MeasureText(button.text.text.c_str(), button.text.font) / 2);
-		button.text.position.y = button.rect.y + (button.rect.height / 2) - (button.text.font / 2);
+		button.text.position.x = button.graph.dest.x + (button.graph.dest.width / 2) - (MeasureText(button.text.text.c_str(), button.text.font) / 2);
+		button.text.position.y = button.graph.dest.y + (button.graph.dest.height / 2) - (button.text.font / 2);
 	}
 
 	void Draw(Button button)
 	{
-		Color usedColor = WHITE;
+		Rectangle onTop = button.graph.source;
+		Rectangle rectPress = button.graph.source;
+		Rectangle deactivate = button.graph.source;
+
+		onTop.y += 32;
+		rectPress.y += 32 * 2;
+		deactivate.y += 32 * 3;
+
+		Rectangle sourceUsed;
 
 		if (button.isPressed)
-		{
-			usedColor = button.pressedColor;
-		}
+			sourceUsed = rectPress;
 		else if (button.isMouseOnTop)
-		{
-			usedColor = button.onMouseTopColor;
-		}
+			sourceUsed = onTop;
 		else
-			usedColor = button.normalColor;
+			sourceUsed = button.graph.source;
 
-		DrawRectangleRec(button.rect, usedColor);
+		DrawTexturePro(button.graph.sprite, sourceUsed, button.graph.dest, button.graph.origin, 0, WHITE);
 
 		text::Draw(button.text);
 	}

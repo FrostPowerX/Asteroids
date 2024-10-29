@@ -72,6 +72,9 @@ namespace game
 				if (input::GetKeyPressed("Back") && !endMenu)
 					pauseMenu = !pauseMenu;
 
+				if (input::GetKeyDown("TripleShoot"))
+					player.tripleShoot = !player.tripleShoot;
+
 				if (pauseMenu)
 					for (int i = 0; i < maxButtonsPMenu; i++)
 					{
@@ -143,6 +146,15 @@ namespace game
 
 			void Draw()
 			{
+				DrawTexturePro(GetSprite("BackGround")->texture,
+					Rectangle {
+					0, 0, textureWidth, textureHeight
+				},
+					Rectangle{ 0, 0, static_cast<float>(resolutionmanager::currentWidth), static_cast<float>(resolutionmanager::currentHeight) },
+					Vector2{ 0,0 },
+					0.f,
+					Color{ 100,100,100,255 });
+
 				Draw(player);
 				asteroidsmanager::Draw();
 
@@ -176,7 +188,7 @@ namespace game
 
 			void InitButtons()
 			{
-				float offset = ButtonHeight * 2.f;
+				float offset = (ButtonHeight * 2.f) * GetScale().y;
 				float posx = currentWidth / 2.f;
 				float posy = offset;
 
@@ -188,7 +200,7 @@ namespace game
 
 				for (int i = 0; i < maxButtonsPMenu; i++)
 				{
-					buttonsPMenu[i] = button::Create(buttonsName[i], posx, posy);
+					buttonsPMenu[i] = button::Create("Button", Rectangle{ posx, posy, ButtonWidth, ButtonHeight }, buttonsName[i]);
 
 					posy += offset;
 				}
@@ -200,7 +212,7 @@ namespace game
 
 				for (int i = 0; i < maxButtonsEMenu; i++)
 				{
-					buttonsEMenu[i] = button::Create(buttonsName[i], posx, posy);
+					buttonsEMenu[i] = button::Create("Button", Rectangle{ posx, posy, ButtonWidth, ButtonHeight }, buttonsName[i]);
 
 					posy += offset;
 				}
@@ -208,8 +220,8 @@ namespace game
 
 			void InitPanels()
 			{
-				playerHealth = panel::Create(Rectangle{ 60,30,120,60 }, "", 0, 0, 0, 0, 15, BLACK, WHITE);
-				score = panel::Create(Rectangle{ 60,60,120,60 }, "", 0, 0, 0, 0, 15, BLACK, WHITE);
+				playerHealth = panel::Create("Panel", Rectangle{ 64, 32,128,64 }, "");
+				score = panel::Create("ScoreBoard", Rectangle{static_cast<float>(currentWidth) / 2, 30,220,60}, "");
 			}
 
 			void CreatePlayer()
@@ -217,7 +229,7 @@ namespace game
 				float screenWidth = static_cast<float>(GetScreenWidth());
 				float screenHeight = static_cast<float>(GetScreenHeight());
 
-				Rectangle dest{ 0,0,32,32 };
+				Rectangle dest{ 0,0,64,64 };
 
 				Circle cir;
 				cir.x = screenWidth / 2;
@@ -259,17 +271,23 @@ namespace game
 			}
 			void MapCollisions()
 			{
-				if (CheckBorderCollision(player.body, currentWidth, 0, currentHeight, 0))
+				if (CheckBorderCollision(player.body, currentWidth + player.body.radius, 0, currentHeight + player.body.radius, 0))
 				{
-					if (player.body.x > currentWidth && player.body.y < currentHeight)
-						player.body.x -= currentWidth;
-					else if (player.body.x < 0 && player.body.y > 0)
-						player.body.x += currentWidth;
+					int minWidth = -player.body.radius;
+					int minHeight = -player.body.radius;
 
-					if (player.body.x < currentWidth && player.body.y > currentHeight)
-						player.body.y -= currentHeight;
-					else if (player.body.x > 0 && player.body.y < 0)
-						player.body.y += currentHeight;
+					int maxWidth = currentWidth + player.body.radius;
+					int maxHeight = currentHeight + player.body.radius;
+
+					if (player.body.x > maxWidth && player.body.y < maxHeight)
+						player.body.x -= maxWidth;
+					else if (player.body.x < minWidth && player.body.y > minHeight)
+						player.body.x += maxWidth;
+
+					if (player.body.x < maxWidth && player.body.y > maxHeight)
+						player.body.y -= maxHeight;
+					else if (player.body.x > minWidth && player.body.y < minHeight)
+						player.body.y += maxHeight;
 				}
 
 				for (int i = 0; i < maxAsteroids; i++)
@@ -279,17 +297,50 @@ namespace game
 					if (!ast.isAlive)
 						continue;
 
-					if (CheckBorderCollision(ast.body, currentWidth, 0, currentHeight, 0))
-					{
-						if (ast.body.x > currentWidth && ast.body.y < currentHeight)
-							ast.body.x -= currentWidth;
-						else if (ast.body.x < 0 && ast.body.y > 0)
-							ast.body.x += currentWidth;
+					int minWidth = -ast.body.radius;
+					int minHeight = -ast.body.radius;
 
-						if (ast.body.x < currentWidth && ast.body.y > currentHeight)
-							ast.body.y -= currentHeight;
-						else if (ast.body.x > 0 && ast.body.y < 0)
-							ast.body.y += currentHeight;
+					int maxWidth = currentWidth + ast.body.radius;
+					int maxHeight = currentHeight + ast.body.radius;
+
+					if (CheckBorderCollision(ast.body, maxWidth, minWidth, maxHeight, minHeight))
+					{
+						if (ast.body.x > maxWidth && ast.body.y < maxHeight)
+							ast.body.x -= maxWidth;
+						else if (ast.body.x < minWidth && ast.body.y > minHeight)
+							ast.body.x += maxWidth;
+
+						if (ast.body.x < maxWidth && ast.body.y > maxHeight)
+							ast.body.y -= maxHeight;
+						else if (ast.body.x > minWidth && ast.body.y < minHeight)
+							ast.body.y += maxHeight;
+					}
+				}
+
+				for (int i = 0; i < maxBullets; i++)
+				{
+					bullet::Bullet& bullet = player.bullets[i];
+
+					if (!bullet.isAlive)
+						continue;
+
+					int minWidth = -bullet.body.radius;
+					int minHeight = -bullet.body.radius;
+
+					int maxWidth = currentWidth + bullet.body.radius;
+					int maxHeight = currentHeight + bullet.body.radius;
+
+					if (CheckBorderCollision(bullet.body, maxWidth, minWidth, maxHeight, minHeight))
+					{
+						if (bullet.body.x > maxWidth && bullet.body.y < maxHeight)
+							bullet.body.x -= maxWidth;
+						else if (bullet.body.x < minWidth && bullet.body.y > minHeight)
+							bullet.body.x += maxWidth;
+
+						if (bullet.body.x < maxWidth && bullet.body.y > maxHeight)
+							bullet.body.y -= maxHeight;
+						else if (bullet.body.x > minWidth && bullet.body.y < minHeight)
+							bullet.body.y += maxHeight;
 					}
 				}
 			}

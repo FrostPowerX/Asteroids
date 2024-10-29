@@ -4,15 +4,17 @@
 
 #include "raylib.h"
 
+#include "managers/SpriteManager.h"
 #include "Text.h"
 
 using namespace std;
+using namespace game::spritemanager;
 
 namespace panel
 {
 	struct Panel
 	{
-		Rectangle rect;
+		Graphic graph;
 
 		text::Text text;
 
@@ -21,17 +23,13 @@ namespace panel
 
 		float minOffSetY = 0;
 		float maxOffSetY = 0;
-
-		Color rectColor = WHITE;
 	};
 
-	Panel Create(Rectangle rect, string text, float minOffSetX, float maxOffSetX, float minOffSetY, float maxOffSetY, int fontSize, Color rectColor, Color textColor);
+	Panel Create(string spriteName, Rectangle dest, string text, float minOffSetX = 5, float maxOffSetX = 5, float minOffSetY = 5, float maxOffSetY = 5, int fontSize = 20, Color textColor = WHITE);
 
 	void SetPosition(Panel& panel, Vector2 newPos);
-	/// Use this for change text
 	void SetText(Panel& panel, string text);
 	void SetColorText(Panel& panel, Color color);
-	void SetBackGroundColor(Panel& panel, Color color);
 
 	void Draw(Panel);
 }

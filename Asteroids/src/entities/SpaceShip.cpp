@@ -21,7 +21,7 @@ namespace game
 		void ActualizePos(SpaceShip& sp);
 		void NormalizeVelocity(SpaceShip& sp);
 
-		SpaceShip Create(Circle cir, Rectangle dest, std::string textureName, float speed, float maxSpeed, float reloadTime, int lives, bool isAlive)
+		SpaceShip Create(Circle cir, Rectangle dest, std::string textureName, float speed, float maxSpeed, float invencibleT, float reloadTime, int lives, bool isAlive)
 		{
 			SpaceShip ship;
 
@@ -38,6 +38,9 @@ namespace game
 			ship.reloadTime = 0;
 			ship.resetTime = reloadTime;
 
+			ship.invencibleT = 0;
+			ship.resetInvT = invencibleT;
+
 			ship.velocity = Vector2{ 0,0 };
 			ship.rotationAngle = 0;
 
@@ -52,7 +55,7 @@ namespace game
 
 			ship.isAlive = isAlive;
 
-			ship.graphic.spriteSheet = spritemanager::GetSprite(textureName).texture;
+			ship.graphic.sprite = spritemanager::GetSprite(textureName)->texture;
 
 			for (int i = 0; i < maxBullets; i++)
 			{
@@ -67,44 +70,60 @@ namespace game
 
 		void TakeDamage(SpaceShip& sp)
 		{
-			sp.body;
+			if (sp.invencibleT > 0)
+				return;
+
+			sp.invencibleT = sp.resetInvT;
+			sp.lives--;
+
+			if (sp.lives <= 0)
+				sp.isAlive = false;
 		}
 
 		void Update(SpaceShip& sp)
 		{
+			if (!sp.isAlive)
+				return;
+
 			for (int i = 0; i < maxBullets; i++)
 			{
 				bullet::Update(sp.bullets[i]);
 			}
 
-			if (!sp.isAlive)
-				return;
-
 			Rotate(sp, GetMousePosition());
 
-			if (input::GetKey("Shoot") && sp.reloadTime == 0)
+			if (input::GetKeyDown("Shoot") && sp.reloadTime <= 0)
 				Shoot(sp);
 
-			if (input::GetKey("Move"))
+			if (input::GetKeyDown("Move"))
 				Move(sp, GetMousePosition());
 
 			sp.reloadTime -= (GetFrameTime() < sp.reloadTime) ? GetFrameTime() : sp.reloadTime;
+			sp.invencibleT -= (GetFrameTime() < sp.invencibleT) ? GetFrameTime() : sp.invencibleT;
 
 			ActualizePos(sp);
 		}
 
 		void Draw(SpaceShip sp)
 		{
+			if (!sp.isAlive)
+				return;
+
 			for (int i = 0; i < maxBullets; i++)
 			{
 				bullet::Draw(sp.bullets[i]);
 			}
 
-			if (!sp.isAlive)
-				return;
-
+#ifdef _DEBUG
 			DrawCircleLines(static_cast<int>(sp.body.x), static_cast<int>(sp.body.y), sp.body.radius, WHITE);
-			DrawTexturePro(sp.graphic.spriteSheet, sp.graphic.source, sp.graphic.dest, sp.graphic.origin, sp.rotationAngle + 90, WHITE);
+#endif // _DEBUG
+
+			DrawTexturePro(sp.graphic.sprite, sp.graphic.source, sp.graphic.dest, sp.graphic.origin, sp.rotationAngle + 90, WHITE);
+		}
+
+		bullet::Bullet& GetBullet(SpaceShip& sp, int index)
+		{
+			return sp.bullets[index];
 		}
 
 		void Move(SpaceShip& sp, Vector2 target)

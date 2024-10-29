@@ -80,7 +80,7 @@ namespace game
 			}
 		}
 
-		int GetKey(std::string name)
+		int GetKeyDown(std::string name)
 		{
 			int key = -1;
 			bool isMouse = false;
@@ -99,6 +99,27 @@ namespace game
 				return IsMouseButtonDown(key);
 
 			return IsKeyDown(key);
+		}
+
+		int GetKeyPressed(std::string name)
+		{
+			int key = -1;
+			bool isMouse = false;
+
+			for (int i = 0; i < maxKeys; i++)
+			{
+				if (keys[i].name == name)
+				{
+					key = keys[i].key;
+					isMouse = keys[i].isMouse;
+					break;
+				}
+			}
+
+			if (isMouse)
+				return IsMouseButtonPressed(key);
+
+			return IsKeyPressed(key);
 		}
 	}
 

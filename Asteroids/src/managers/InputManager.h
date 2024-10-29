@@ -12,6 +12,7 @@ namespace game
 		void ChangeKey(int newKey, std::string name, bool isMouse = false);
 		void RemoveKey(std::string name);
 
-		int GetKey(std::string name);
+		int GetKeyDown(std::string name);
+		int GetKeyPressed(std::string name);
 	}
 }

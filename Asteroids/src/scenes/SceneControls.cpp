@@ -19,7 +19,7 @@ namespace game
 
 			void Input()
 			{
-				if (input::GetKey("Back"))
+				if (input::GetKeyDown("Back"))
 					currentScene = SCENE::MENU;
 			}
 			void Update()

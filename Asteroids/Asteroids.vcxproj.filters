@@ -15,9 +15,6 @@
     <ClCompile Include="src\utilities\Utils.cpp">
       <Filter>Utilities</Filter>
     </ClCompile>
-    <ClCompile Include="src\entities\Ball.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
     <ClCompile Include="src\entities\PowerUp.cpp">
       <Filter>Entities</Filter>
     </ClCompile>
@@ -54,6 +51,9 @@
     <ClCompile Include="src\managers\AsteroidsManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
+    <ClCompile Include="src\managers\GameManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameLoop.h" />
@@ -71,9 +71,6 @@
     </ClInclude>
     <ClInclude Include="src\utilities\Circle.h">
       <Filter>Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="src\entities\Ball.h">
-      <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="src\entities\PowerUP.h">
       <Filter>Entities</Filter>
@@ -109,6 +106,9 @@
       <Filter>Entities</Filter>
     </ClInclude>
     <ClInclude Include="src\managers\AsteroidsManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\managers\GameManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
   </ItemGroup>

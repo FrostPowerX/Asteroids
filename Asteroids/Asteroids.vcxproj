@@ -12,13 +12,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\entities\Asteroid.cpp" />
-    <ClCompile Include="src\entities\Ball.cpp" />
     <ClCompile Include="src\entities\Bullet.cpp" />
     <ClCompile Include="src\entities\PowerUp.cpp" />
     <ClCompile Include="src\entities\SpaceShip.cpp" />
     <ClCompile Include="src\GameLoop.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\managers\AsteroidsManager.cpp" />
+    <ClCompile Include="src\managers\GameManager.cpp" />
     <ClCompile Include="src\managers\InputManager.cpp" />
     <ClCompile Include="src\managers\ResolutionManager.cpp" />
     <ClCompile Include="src\managers\SpriteManager.cpp" />
@@ -33,12 +33,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\entities\Asteroid.h" />
-    <ClInclude Include="src\entities\Ball.h" />
     <ClInclude Include="src\entities\Bullet.h" />
     <ClInclude Include="src\entities\PowerUP.h" />
     <ClInclude Include="src\entities\SpaceShip.h" />
     <ClInclude Include="src\GameLoop.h" />
     <ClInclude Include="src\managers\AsteroidsManager.h" />
+    <ClInclude Include="src\managers\GameManager.h" />
     <ClInclude Include="src\managers\InputManager.h" />
     <ClInclude Include="src\managers\ResolutionManager.h" />
     <ClInclude Include="src\managers\SpriteManager.h" />

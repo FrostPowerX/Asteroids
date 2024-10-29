@@ -12,6 +12,13 @@ namespace game
 
 	namespace asteroid
 	{
+		enum class AsteroidType
+		{
+			SMALL,
+			NORMAL,
+			LARGE
+		};
+
 		struct Asteroid
 		{
 			Circle body;
@@ -21,13 +28,15 @@ namespace game
 			Vector2 target;
 			Vector2 dir;
 
+			AsteroidType type;
+
 			float speed;
 			float rotationAngle;
 
 			bool isAlive;
 		};
 
-		Asteroid Create(Circle cir, Rectangle dest, std::string textureName, Vector2 target, float speed, bool isAlive = false);
+		Asteroid Create(Circle cir, Rectangle dest, std::string textureName, Vector2 target, AsteroidType type = AsteroidType::NORMAL, float speed = 100.f, bool isAlive = false);
 
 		void Update(Asteroid& ast);
 		void Draw(Asteroid ast);

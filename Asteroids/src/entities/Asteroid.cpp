@@ -12,7 +12,7 @@ namespace game
 	{
 		void Move(Asteroid& ast);
 
-		Asteroid Create(Circle cir, Rectangle dest, std::string textureName, Vector2 target, float speed, bool isAlive)
+		Asteroid Create(Circle cir, Rectangle dest, std::string textureName, Vector2 target, AsteroidType type, float speed, bool isAlive)
 		{
 			Asteroid newA;
 
@@ -32,11 +32,12 @@ namespace game
 			newA.graphic.source = Rectangle{ 0,0,textureWidth,textureHeight };
 			newA.graphic.dest = dest;
 
+			newA.type = type;
 			newA.speed = speed;
 
 			newA.isAlive = isAlive;
 
-			newA.graphic.spriteSheet = GetSprite(textureName).texture;
+			newA.graphic.sprite = GetSprite(textureName)->texture;
 
 			SetTarget(newA, target);
 
@@ -65,8 +66,11 @@ namespace game
 			if (!ast.isAlive)
 				return;
 
+#ifdef _DEBUG
 			DrawCircleLines(static_cast<int>(ast.body.x), static_cast<int>(ast.body.y), ast.body.radius, RED);
-			DrawTexturePro(ast.graphic.spriteSheet, ast.graphic.source, ast.graphic.dest, ast.graphic.origin, ast.rotationAngle + 90, WHITE);
+#endif // !DEBUG
+
+			DrawTexturePro(ast.graphic.sprite, ast.graphic.source, ast.graphic.dest, ast.graphic.origin, ast.rotationAngle + 90, WHITE);
 		}
 
 		void SetTarget(Asteroid& ast, Vector2 target)

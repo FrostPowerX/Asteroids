@@ -37,6 +37,7 @@ void NormalizeVector(float& x, float& y);
 float GetMagnitud(Vector2 vector);
 
 double RadiansToGrades(double r);
+double GradesToRadians(double r);
 
 //void BouncingAngle(Ball& ball, Rectangle& rect);
 

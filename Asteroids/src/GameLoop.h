@@ -13,8 +13,6 @@ namespace game
 		MENU,
 	};
 
-	extern const int ScreenWidth;
-	extern const int ScreenHeight;
 	extern const std::string GameName;
 
 	extern SCENE currentScene;

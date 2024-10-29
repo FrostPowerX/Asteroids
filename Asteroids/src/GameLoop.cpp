@@ -15,8 +15,6 @@ using namespace game::resolutionmanager;
 
 namespace game
 {
-	const int ScreenWidth = 1024;
-	const int ScreenHeight = 768;
 	const std::string GameName = "Asteroids";
 
 	SCENE currentScene = SCENE::MENU;
@@ -51,7 +49,7 @@ namespace game
 
 	void Init()
 	{
-		InitWindow(ScreenWidth, ScreenHeight, GameName.c_str());
+		InitWindow(currentWidth, currentHeight, GameName.c_str());
 		SetExitKey(KEY_NULL);
 
 
@@ -86,7 +84,7 @@ namespace game
 			break;
 		}
 
-		if (input::GetKey("res1"))
+		if (input::GetKeyDown("res1"))
 		{
 			SetResolution(800,600);
 			scenes::gameplay::Init();
@@ -95,7 +93,7 @@ namespace game
 			scenes::menu::Init();
 		}
 
-		if (input::GetKey("res2"))
+		if (input::GetKeyDown("res2"))
 		{
 			SetResolution(1024,768);
 			scenes::gameplay::Init();
@@ -104,7 +102,7 @@ namespace game
 			scenes::menu::Init();
 		}
 
-		if (input::GetKey("res3"))
+		if (input::GetKeyDown("res3"))
 		{
 			SetResolution(1920,1080);
 			scenes::gameplay::Init();

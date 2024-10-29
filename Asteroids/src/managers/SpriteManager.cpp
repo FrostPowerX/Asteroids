@@ -17,18 +17,18 @@ namespace game
 			sprites.push_back(newSp);
 		}
 
-		Sprite GetSprite(std::string name)
+		Sprite* GetSprite(std::string name)
 		{
 			if (sprites.size() <= 0)
-				return Sprite();
+				return nullptr;
 
 			for (int i = 0; i < static_cast<int>(sprites.size()); i++)
 			{
 				if(name == sprites[i]->name)
-					return *sprites[i];
+					return sprites[i];
 			}
 
-			return Sprite();
+			return nullptr;
 		}
 
 		void LoadSprites()

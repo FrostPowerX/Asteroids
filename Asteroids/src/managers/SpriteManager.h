@@ -20,14 +20,14 @@ namespace game
 
 		struct Graphic
 		{
-			Texture2D spriteSheet;
+			Texture2D sprite;
 
 			Rectangle source;
 			Rectangle dest;
 			Vector2 origin;
 		};
 
-		Sprite GetSprite(std::string name);
+		Sprite* GetSprite(std::string name);
 
 		void LoadSprites();
 		void UnloadSprites();

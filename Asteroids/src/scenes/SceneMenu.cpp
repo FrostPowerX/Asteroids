@@ -18,14 +18,14 @@ namespace game
 	{
 		namespace menu
 		{
-			const int maxButtons = 4;
+			const int maxButtonsPMenu = 4;
 
-			Button buttons[maxButtons];
-			std::string bNames[maxButtons];
+			Button buttons[maxButtonsPMenu];
+			std::string bNames[maxButtonsPMenu];
 
 			void Init()
 			{
-				float offset = (ButtonHeight * GetScale().y) * 2.f;
+				float offset = ButtonHeight * 2.f;
 				float posx = currentWidth / 2.f;
 				float posy = offset;
 
@@ -34,7 +34,7 @@ namespace game
 				bNames[2] = "Credits";
 				bNames[3] = "Exit";
 
-				for (int i = 0; i < maxButtons; i++)
+				for (int i = 0; i < maxButtonsPMenu; i++)
 				{
 					buttons[i] = Create(bNames[i], posx, posy);
 					
@@ -44,7 +44,7 @@ namespace game
 
 			void Input()
 			{
-				for (int i = 0; i < maxButtons; i++)
+				for (int i = 0; i < maxButtonsPMenu; i++)
 				{
 					MouseOnTop(buttons[i]);
 					if (IsPressed(buttons[i]))
@@ -59,7 +59,7 @@ namespace game
 
 			void Draw()
 			{
-				for (int i = 0; i < maxButtons; i++)
+				for (int i = 0; i < maxButtonsPMenu; i++)
 				{
 					Draw(buttons[i]);
 				}

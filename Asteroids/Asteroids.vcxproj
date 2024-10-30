@@ -21,11 +21,12 @@
     <ClCompile Include="src\managers\GameManager.cpp" />
     <ClCompile Include="src\managers\InputManager.cpp" />
     <ClCompile Include="src\managers\ResolutionManager.cpp" />
+    <ClCompile Include="src\managers\SoundManager.cpp" />
     <ClCompile Include="src\managers\SpriteManager.cpp" />
-    <ClCompile Include="src\scenes\SceneControls.cpp" />
     <ClCompile Include="src\scenes\SceneCredits.cpp" />
     <ClCompile Include="src\scenes\SceneGamePlay.cpp" />
     <ClCompile Include="src\scenes\SceneMenu.cpp" />
+    <ClCompile Include="src\scenes\SceneOptions.cpp" />
     <ClCompile Include="src\ui\Button.cpp" />
     <ClCompile Include="src\ui\Panel.cpp" />
     <ClCompile Include="src\ui\Text.cpp" />
@@ -41,11 +42,12 @@
     <ClInclude Include="src\managers\GameManager.h" />
     <ClInclude Include="src\managers\InputManager.h" />
     <ClInclude Include="src\managers\ResolutionManager.h" />
+    <ClInclude Include="src\managers\SoundManager.h" />
     <ClInclude Include="src\managers\SpriteManager.h" />
-    <ClInclude Include="src\scenes\SceneControls.h" />
     <ClInclude Include="src\scenes\SceneCredits.h" />
     <ClInclude Include="src\scenes\SceneGamePlay.h" />
     <ClInclude Include="src\scenes\SceneMenu.h" />
+    <ClInclude Include="src\scenes\SceneOptions.h" />
     <ClInclude Include="src\ui\Button.h" />
     <ClInclude Include="src\ui\Panel.h" />
     <ClInclude Include="src\ui\Text.h" />
@@ -108,6 +110,10 @@
       <AdditionalLibraryDirectories>$(SolutionDir)libs/raylib-5.0_win32_msvc16/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>raylib.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>
+xcopy "$(SolutionDir)res" "$(OutDir)res" /i /y /s</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -128,6 +134,10 @@
       <AdditionalDependencies>raylib.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
+    <PostBuildEvent>
+      <Command>
+xcopy "$(SolutionDir)res" "$(OutDir)res" /i /y /s</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

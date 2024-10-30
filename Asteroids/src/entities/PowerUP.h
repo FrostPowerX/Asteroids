@@ -2,24 +2,34 @@
 
 #include "raylib.h"
 
+#include "managers/SpriteManager.h"
+
+using namespace game::spritemanager;
+
 namespace powerup
 {
 	struct PowerUp
 	{
-		Rectangle rect;
+		Graphic graph;
 
-		Color rectColor;
+		Rectangle sourceUsed;
 
-		float addHeight;
-		float addSpeed;
-		int addBalls;
+		Vector2 target;
+		Vector2 dir;
 
-		int toPlayer;
+		float animTime;
+		float resetTime;
+
+		float speed;
 
 		bool isActive;
 	};
 
-	PowerUp Create(Rectangle rect, Color rectColor, float heightPlus, float speedPlus, int ballsPlus);
+	PowerUp Create(std::string spriteName, Rectangle rect, Vector2 target, float speed = 20.f, bool isAlive = false);
 
-	void Draw(PowerUp& pUp, int screenWidth, int screenHeight);
+	void Update(PowerUp& p);
+
+	void Draw(PowerUp& pUp);
+
+	void SetTarget(PowerUp& p, Vector2 target);
 }

@@ -2,37 +2,84 @@
 
 #include "managers/ResolutionManager.h"
 
+#include "utilities/Utils.h"
+
 using namespace game::resolutionmanager;
 
 namespace powerup
 {
-	PowerUp Create(Rectangle rect, Color rectColor, float heightPlus, float speedPlus, int ballsPlus)
+	void Move(PowerUp& p);
+	void Animation(PowerUp& p);
+
+	PowerUp Create(std::string spriteName, Rectangle dest, Vector2 target, float speed, bool isAlive)
 	{
-		PowerUp newPowerUp;
+		PowerUp newP;
 
-		rect.width *= GetScale().x;
-		rect.height *= GetScale().y;
+		dest.x *= GetScale().x;
+		dest.y *= GetScale().y;
 
-		newPowerUp.rect = rect;
-		newPowerUp.rectColor = rectColor;
-		newPowerUp.addHeight = heightPlus;
-		newPowerUp.addSpeed = speedPlus;
-		newPowerUp.addBalls = ballsPlus;
+		dest.width *= GetScale().x;
+		dest.height *= GetScale().y;
 
-		newPowerUp.toPlayer = -1;
-		newPowerUp.isActive = false;
+		newP.graph.sprite = GetSprite(spriteName)->texture;
 
-		return newPowerUp;
+		newP.graph.origin = Vector2{ (0),(0) };
+		newP.graph.source = Rectangle{ 0,0,textureWidth, textureHeight };
+		newP.graph.dest = dest;
+
+		newP.sourceUsed = newP.graph.source;
+
+		newP.speed = speed;
+		newP.isActive = isAlive;
+
+		newP.animTime = 0;
+		newP.resetTime = 0.2f;
+
+		SetTarget(newP, target);
+
+		return newP;
 	}
 
-	void Draw(PowerUp& pUp, int screenWidth, int screenHeight)
+	void Update(PowerUp& p)
 	{
-		Vector3 pos;
-		pos.x = pUp.rect.x + (pUp.rect.width / 2) - (screenWidth / 2);
-		pos.y = 10;
-		pos.z = pUp.rect.y + (pUp.rect.height / 2) - (screenHeight / 2);
+		Move(p);
+		Animation(p);
+	}
 
-		DrawCube(pos, pUp.rect.width, 15, pUp.rect.height, pUp.rectColor);
+
+
+	void Draw(PowerUp& pUp)
+	{
+
+#ifdef _DEBUG
+		DrawRectangle(static_cast<int>(pUp.graph.dest.x), static_cast<int>(pUp.graph.dest.y), static_cast<int>(pUp.graph.dest.width), static_cast<int>(pUp.graph.dest.height), GREEN);
+#endif
+
+		DrawTexturePro(pUp.graph.sprite, pUp.sourceUsed, pUp.graph.dest, pUp.graph.origin, 0, WHITE);
+	}
+
+	void Move(PowerUp& p)
+	{
+		p.graph.dest.x += p.dir.x * p.speed * GetFrameTime();
+		p.graph.dest.y += p.dir.y * p.speed * GetFrameTime();
+	}
+
+	void Animation(PowerUp& p)
+	{
+		p;
+	}
+
+	void SetTarget(PowerUp& p, Vector2 target)
+	{
+		Vector2 dir = Vector2{ 0,0 };;
+		p.target = target;
+
+		dir.x = p.target.x - p.graph.dest.x;
+		dir.y = p.target.y - p.graph.dest.y;
+
+		dir = NormalizeVector(dir);
+
+		p.dir = dir;
 	}
 }
 

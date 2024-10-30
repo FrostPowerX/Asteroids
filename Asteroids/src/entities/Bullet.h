@@ -31,7 +31,7 @@ namespace bullet
 		bool isAlive;
 	};
 
-	Bullet Create(Circle cir, Rectangle rect, std::string textureName, Vector2 target, float speed = 500.f, float timeAlive = 5.f, bool isAlive = false);
+	Bullet Create(Circle cir, Rectangle rect, std::string textureName, Vector2 target, float speed = 500.f, float timeAlive = 1.f, bool isAlive = false);
 
 
 	void Update(Bullet& bullet);

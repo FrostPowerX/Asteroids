@@ -43,5 +43,10 @@ Y a ti por jugar!
 Soy estudiante de primer año en Image Campus en la tecnicatura de desarrollo de videojuegos, ¡y me encantan los videojuegos!  
 #imagecampus
 
+## Enlaces
+[Página de mi perfil Itch.io](https://frostpower.itch.io).
+[Página del juego Itch.io](https://frostpower.itch.io/capsule-reaper).
+
+
 ## Licencia
 Este proyecto no cuenta con una licencia específica. Todos los derechos reservados.

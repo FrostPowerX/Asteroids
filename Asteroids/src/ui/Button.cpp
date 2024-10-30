@@ -1,8 +1,10 @@
 #include "Button.h"
 
 #include "managers/ResolutionManager.h"
+#include "managers/SoundManager.h"
 
 using namespace game::resolutionmanager;
+using namespace game::soundmanager;
 
 namespace button
 {
@@ -83,7 +85,10 @@ namespace button
 
 		if (IsMouseButtonReleased(MouseButton::MOUSE_BUTTON_LEFT))
 			if (button.isMouseOnTop)
+			{
+				PlayS("Button");
 				isReleassed = true;
+			}
 
 		if (IsMouseButtonDown(MouseButton::MOUSE_BUTTON_LEFT))
 		{

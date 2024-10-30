@@ -44,8 +44,8 @@ Soy estudiante de primer año en Image Campus en la tecnicatura de desarrollo de
 #imagecampus
 
 ## Enlaces
-([Página de mi perfil Itch.io](https://frostpower.itch.io))
-([Página del juego Itch.io](https://frostpower.itch.io/capsule-reaper))
+[Página de mi perfil Itch.io](https://frostpower.itch.io).
+[Página del juego Itch.io](https://frostpower.itch.io/capsule-reaper).
 
 
 ## Licencia

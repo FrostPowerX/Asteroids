@@ -3,14 +3,15 @@
 #include "raylib.h"
 
 #include "scenes/SceneGamePlay.h"
-#include "scenes/SceneControls.h"
 #include "scenes/SceneCredits.h"
+#include "scenes/SceneOptions.h"
 #include "scenes/SceneMenu.h"
 
 #include "managers/ResolutionManager.h"
 #include "managers/SpriteManager.h"
 #include "managers/InputManager.h"
 #include "managers/SpriteManager.h"
+#include "managers/SoundManager.h"
 
 using namespace game::resolutionmanager;
 using namespace game::spritemanager;
@@ -54,14 +55,17 @@ namespace game
 		InitWindow(currentWidth, currentHeight, GameName.c_str());
 		SetExitKey(KEY_NULL);
 
+		InitAudioDevice();
+
 		HideCursor();
 
 		spritemanager::LoadSprites();
+		soundmanager::LoadSounds();
 
 		input::Init();
 		resolutionmanager::Init();
 		scenes::gameplay::Init();
-		scenes::controls::Init();
+		scenes::options::Init();
 		scenes::credits::Init();
 		scenes::menu::Init();
 	}
@@ -74,8 +78,8 @@ namespace game
 			scenes::gameplay::Input();
 			break;
 
-		case SCENE::CONTROLS:
-			scenes::controls::Input();
+		case SCENE::OPTIONS:
+			scenes::options::Input();
 			break;
 
 		case SCENE::CREDITS:
@@ -85,33 +89,6 @@ namespace game
 		case SCENE::MENU:
 			scenes::menu::Input();
 			break;
-		}
-
-		if (input::GetKeyDown("res1"))
-		{
-			SetResolution(800, 600);
-			scenes::gameplay::Init();
-			scenes::controls::Init();
-			scenes::credits::Init();
-			scenes::menu::Init();
-		}
-
-		if (input::GetKeyDown("res2"))
-		{
-			SetResolution(1024, 768);
-			scenes::gameplay::Init();
-			scenes::controls::Init();
-			scenes::credits::Init();
-			scenes::menu::Init();
-		}
-
-		if (input::GetKeyDown("res3"))
-		{
-			SetResolution(1920, 1080);
-			scenes::gameplay::Init();
-			scenes::controls::Init();
-			scenes::credits::Init();
-			scenes::menu::Init();
 		}
 	}
 
@@ -123,8 +100,8 @@ namespace game
 			scenes::gameplay::Update();
 			break;
 
-		case SCENE::CONTROLS:
-			scenes::controls::Update();
+		case SCENE::OPTIONS:
+			scenes::options::Update();
 			break;
 
 		case SCENE::CREDITS:
@@ -147,14 +124,16 @@ namespace game
 			case game::SCENE::GAMEPLAY:
 				scenes::gameplay::Init();
 				break;
-			case game::SCENE::CONTROLS:
-				scenes::controls::Init();
+			case game::SCENE::OPTIONS:
+				scenes::options::Init();
 				break;
 			case game::SCENE::CREDITS:
 				scenes::credits::Init();
 				break;
 			}
 		}
+
+		soundmanager::Update();
 	}
 
 	void Draw()
@@ -169,8 +148,8 @@ namespace game
 			scenes::gameplay::Draw();
 			break;
 
-		case SCENE::CONTROLS:
-			scenes::controls::Draw();
+		case SCENE::OPTIONS:
+			scenes::options::Draw();
 			break;
 
 		case SCENE::CREDITS:
@@ -219,7 +198,9 @@ namespace game
 	void DeInit()
 	{
 		spritemanager::UnloadSprites();
+		soundmanager::UnloadSounds();
 		CloseWindow();
+		CloseAudioDevice();
 	}
 }
 

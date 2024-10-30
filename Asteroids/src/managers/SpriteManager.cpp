@@ -39,17 +39,19 @@ namespace game
 
 		void LoadSprites()
 		{
-			AddSprite("BackGround", "res/BackGround.png");
-			AddSprite("PlayerShip", "res/SpaceShip.png");
-			AddSprite("Cursor", "res/Cursor.png");
-			AddSprite("Asteroid", "res/Asteroid.png");
-			AddSprite("Bullet", "res/Bullet.png");
-			AddSprite("Enemy", "res/Enemy.png");
-			AddSprite("Button", "res/Button.png", false);
-			AddSprite("Panel", "res/Panel.png", false);
-			AddSprite("ScoreBoard", "res/ScoreBoard.png", false);
-			AddSprite("LinkButton", "res/LinkButton.png", false);
-			AddSprite("CheckButton", "res/CheckButton.png", false);
+			AddSprite("BackGround", "res/Sprites/BackGround.png");
+			AddSprite("PlayerShip", "res/Sprites/SpaceShip.png");
+			AddSprite("Cursor", "res/Sprites/Cursor.png");
+			AddSprite("Asteroid", "res/Sprites/Asteroid.png");
+			AddSprite("Bullet", "res/Sprites/Bullet.png");
+			AddSprite("Enemy", "res/Sprites/Enemy.png");
+			AddSprite("PowerUp", "res/Sprites/PowerUp.png");
+			AddSprite("Button", "res/Sprites/Button.png", false);
+			AddSprite("Panel", "res/Sprites/Panel.png", false);
+			AddSprite("ScoreBoard", "res/Sprites/ScoreBoard.png", false);
+			AddSprite("LinkButton", "res/Sprites/LinkButton.png", false);
+			AddSprite("CheckButton", "res/Sprites/CheckButton.png", false);
+			AddSprite("Controls", "res/Controls.png", false);
 		}
 
 		void UnloadSprites()

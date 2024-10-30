@@ -4,9 +4,12 @@
 
 #include "managers/InputManager.h"
 #include "managers/ResolutionManager.h"
+#include "managers/SoundManager.h"
+
 #include "utilities/Utils.h"
 
 using namespace game::resolutionmanager;
+using namespace game::soundmanager;
 
 namespace game
 {
@@ -73,6 +76,8 @@ namespace game
 			if (sp.invencibleT > 0)
 				return;
 
+			PlayS("DmgRec");
+
 			sp.invencibleT = sp.resetInvT;
 			sp.lives--;
 
@@ -96,7 +101,12 @@ namespace game
 				Shoot(sp, sp.tripleShoot);
 
 			if (input::GetKeyDown("Move"))
+			{
+				PlayS("Move");
 				Move(sp, GetMousePosition());
+			}
+			else
+				StopS("Move");
 
 			sp.reloadTime -= (GetFrameTime() < sp.reloadTime) ? GetFrameTime() : sp.reloadTime;
 			sp.invencibleT -= (GetFrameTime() < sp.invencibleT) ? GetFrameTime() : sp.invencibleT;
@@ -109,16 +119,23 @@ namespace game
 			if (!sp.isAlive)
 				return;
 
+			Color color;
+
 			for (int i = 0; i < maxBullets; i++)
 			{
 				bullet::Draw(sp.bullets[i]);
 			}
 
+			if (sp.invencibleT <= 0)
+				color = WHITE;
+			else
+				color = { 100,100,100,150 };
+
 #ifdef _DEBUG
 			DrawCircleLines(static_cast<int>(sp.body.x), static_cast<int>(sp.body.y), sp.body.radius, WHITE);
 #endif // _DEBUG
 
-			DrawTexturePro(sp.graphic.sprite, sp.graphic.source, sp.graphic.dest, sp.graphic.origin, sp.rotationAngle + 90, WHITE);
+			DrawTexturePro(sp.graphic.sprite, sp.graphic.source, sp.graphic.dest, sp.graphic.origin, sp.rotationAngle + 90, color);
 		}
 
 		bullet::Bullet& GetBullet(SpaceShip& sp, int index)
@@ -168,6 +185,8 @@ namespace game
 		}
 		void Shoot(SpaceShip& sp, bool isTriple)
 		{
+			PlayS("Shoot");
+
 			ActiveBullet(sp, isTriple);
 
 			sp.reloadTime = sp.resetTime;

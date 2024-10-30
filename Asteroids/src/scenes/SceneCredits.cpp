@@ -22,13 +22,15 @@ namespace game
 	{
 		namespace credits
 		{
+			const int maxPanels = 5;
 			const int maxLinksButtons = 5;
+			const int maxText = 7;
 
-			Panel panels[maxLinksButtons];
+			Panel panels[maxPanels];
 
 			Button backButton;
 			Button linksButtons[maxLinksButtons];
-			Text texts[maxLinksButtons];
+			Text texts[maxText];
 
 			void PanelInit();
 			void TextInit();
@@ -67,9 +69,11 @@ namespace game
 							break;
 
 						case 3:
+							OpenURL("https://sfbgames.itch.io/chiptone");
 							break;
 
 						case 4:
+							OpenURL("https://yurisizov.itch.io/boscaceoil-blue");
 							break;
 						}
 				}
@@ -87,10 +91,19 @@ namespace game
 			void Draw()
 			{
 				Draw(backButton);
-				for (int i = 0; i < maxLinksButtons; i++)
+
+				for (int i = 0; i < maxPanels; i++)
 				{
 					Draw(panels[i]);
+				}
+
+				for (int i = 0; i < maxText; i++)
+				{
 					Draw(texts[i]);
+				}
+
+				for (int i = 0; i < maxLinksButtons; i++)
+				{
 					Draw(linksButtons[i]);
 				}
 			}
@@ -105,14 +118,14 @@ namespace game
 				float width = 300;
 				float height = 60;
 
-				float midWidth = GetScreenWidth() / 2;
+				float midWidth = static_cast<float>(GetScreenWidth() / 2);
 				float offSetHeight = (height * GetScale().y) * 2;
 
 
 				panels[0] = panel::Create("Panel", Rectangle{ midWidth,offSetHeight ,width,height }, "DEVELOPER");
 				panels[1] = panel::Create("Panel", Rectangle{ midWidth,offSetHeight * 2,width,height }, "TEXTURES");
 				panels[2] = panel::Create("Panel", Rectangle{ midWidth,offSetHeight * 3.4f,width,height }, "SOUNDS");
-				panels[3] = panel::Create("Panel", Rectangle{ midWidth,offSetHeight * 4.4f,width,height }, "SPECIAL MENTIONS");
+				panels[3] = panel::Create("Panel", Rectangle{ midWidth,offSetHeight * 4.8f,width,height }, "SPECIAL MENTIONS");
 			}
 
 			void TextInit()
@@ -120,8 +133,10 @@ namespace game
 				texts[0] = text::Create("Emanuel Parajon", panels[0].graph.dest.x + (panels[0].graph.dest.width / 2), panels[0].graph.dest.y + panels[0].graph.dest.height * 1.2f, 20, WHITE);
 				texts[1] = text::Create("Buttons, Panels, ScoreBoard By Emanuel Parajon", panels[1].graph.dest.x + (panels[1].graph.dest.width / 2), panels[1].graph.dest.y + panels[1].graph.dest.height * 1.2f, 20, WHITE);
 				texts[2] = text::Create("SpaceShips, Asteroids, Backgrounds By Victoria Thjellesen", panels[1].graph.dest.x + (panels[1].graph.dest.width / 2), panels[1].graph.dest.y + panels[1].graph.dest.height * 1.8f, 20, WHITE);
-				texts[3] = text::Create("Sergio Baretto", panels[3].graph.dest.x + (panels[3].graph.dest.width / 2), panels[3].graph.dest.y + panels[3].graph.dest.height * 1.2f, 20, WHITE);
-				texts[4] = text::Create("Stefano Cvitanich", panels[3].graph.dest.x + (panels[3].graph.dest.width / 2), panels[3].graph.dest.y + panels[3].graph.dest.height * 1.8f, 20, WHITE);
+				texts[3] = text::Create("ChipTone", panels[3].graph.dest.x + (panels[2].graph.dest.width / 2), panels[2].graph.dest.y + panels[2].graph.dest.height * 1.2f, 20, WHITE);
+				texts[4] = text::Create("Bosca Ceoil", panels[3].graph.dest.x + (panels[2].graph.dest.width / 2), panels[2].graph.dest.y + panels[2].graph.dest.height * 1.8f, 20, WHITE);
+				texts[5] = text::Create("Sergio Baretto", panels[3].graph.dest.x + (panels[3].graph.dest.width / 2), panels[3].graph.dest.y + panels[3].graph.dest.height * 1.2f, 20, WHITE);
+				texts[6] = text::Create("Stefano Cvitanich", panels[3].graph.dest.x + (panels[3].graph.dest.width / 2), panels[3].graph.dest.y + panels[3].graph.dest.height * 1.8f, 20, WHITE);
 			}
 
 			void ButtonInit()

@@ -22,17 +22,19 @@
 ## Créditos
 
 **Desarrollador**  
-Emanuel Parajon
+Emanuel Parajon (Yo) 
 
 **Texturas**  
-Emanuel Parajon  
-Victoria Thjellesen
+Emanuel Parajon (Yo) 
+
+[Victoria Thjellesen](https://www.artstation.com/victoria_thjellesen)
+
 
 **Sonido**  
-ChipTone
+[ChipTone](https://sfbgames.itch.io/chiptone)
 
 **Música**  
-Bosca Ceoil
+[Bosca Ceoil](https://yurisizov.itch.io/boscaceoil-blue)
 
 **Menciones Especiales**  
 Sergio Baretto  
@@ -41,11 +43,12 @@ Y a ti por jugar!
 
 ## Sobre Mí
 Soy estudiante de primer año en Image Campus en la tecnicatura de desarrollo de videojuegos, ¡y me encantan los videojuegos!  
-#imagecampus
+[#imagecampus](https://www.imagecampus.edu.ar/)
 
 ## Enlaces
-[Página de mi perfil Itch.io](https://frostpower.itch.io).
-[Página del juego Itch.io](https://frostpower.itch.io/capsule-reaper).
+[Página de mi perfil Itch.io](https://frostpower.itch.io). 
+
+[Página del juego Itch.io](https://frostpower.itch.io/capsule-reaper). 
 
 
 ## Licencia

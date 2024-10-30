@@ -1,4 +1,5 @@
 # Capsule Reaper
+![Imagen 1](Asteroids/res/Sprites/Icon.png)
 
 ## Descripción
 **Capsule Reaper** es un juego inspirado en el clásico "Asteroids". En este juego, en vez de destruir asteroides, tendrás que destruir virus mientras recoges power-ups que te ayudarán a sobrevivir y sumar puntos.
@@ -10,6 +11,13 @@
 1. Descarga el archivo .zip del juego.
 2. Extrae el contenido del .zip en tu carpeta de preferencia.
 3. Ejecuta el archivo `.exe` para comenzar a jugar.
+
+## Sprites
+<!-- Aquí puedes agregar capturas de pantalla o GIFs del juego -->
+![Imagen 2](Asteroids/res/Sprites/SpaceShip.png)
+![Imagen 3](Asteroids/res/Sprites/Bullet.png)
+![Imagen 4](Asteroids/res/Sprites/PowerUp.png)
+![Imagen 5](Asteroids/res/Sprites/Asteroid.png)
 
 ## Créditos
 

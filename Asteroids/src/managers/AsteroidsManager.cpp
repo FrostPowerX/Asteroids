@@ -6,16 +6,24 @@ namespace game
 	{
 		Asteroid asteroids[maxAsteroids];
 
+		PowerUp power[maxPowers];
+
+		float resetCount = 10.f;
 		float countDown = 0;
-		float resetCount = 2.f;
+
+		float resetCountP = 60.f;
+		float countDownP = resetCountP;
+
+		int astToSpawn = 2;
 
 		void SpawnAsteroid(Vector2 position, AsteroidType type);
+
+		void CreatePowerUp();
 
 		void Init()
 		{
 			for (int i = 0; i < maxAsteroids; i++)
 			{
-
 				AsteroidType type = static_cast<AsteroidType>(GetRandomValue(0, static_cast<int>(AsteroidType::LARGE)));
 				Rectangle rect{};
 				Circle cir{};
@@ -27,7 +35,7 @@ namespace game
 				case game::asteroid::AsteroidType::SMALL:
 					rect = { 0,0,16,16 };
 					cir = { 0,0,8 };
-					vel = 100.f;
+					vel = 75.f;
 					break;
 
 				case game::asteroid::AsteroidType::NORMAL:
@@ -48,6 +56,8 @@ namespace game
 
 				asteroids[i] = Create(cir, rect, "Asteroid", Vector2{ 0,0 }, type, vel);
 			}
+
+			CreatePowerUp();
 		}
 
 		void Update()
@@ -58,16 +68,29 @@ namespace game
 					Update(asteroids[i]);
 			}
 
+			for (int i = 0; i < maxPowers; i++)
+			{
+				if (power[i].isActive)
+					powerup::Update(power[i]);
+			}
+
 			countDown -= (GetFrameTime() < countDown) ? GetFrameTime() : countDown;
+			countDownP -= (GetFrameTime() < countDownP) ? GetFrameTime() : countDownP;
 
 			if (countDown <= 0)
 			{
-				ActiveAsteroid();
-				ActiveAsteroid();
-				ActiveAsteroid();
-				ActiveAsteroid();
-				ActiveAsteroid();
+				for (int i = 0; i < astToSpawn; i++)
+				{
+					ActiveAsteroid();
+				}
 				countDown = resetCount;
+				astToSpawn++;
+			}
+
+			if (countDownP <= 0)
+			{
+				ActivePower();
+				countDownP = resetCountP;
 			}
 		}
 
@@ -77,6 +100,12 @@ namespace game
 			{
 				if (asteroids[i].isAlive)
 					Draw(asteroids[i]);
+			}
+
+			for (int i = 0; i < maxPowers; i++)
+			{
+				if (power[i].isActive)
+					powerup::Draw(power[i]);
 			}
 		}
 
@@ -152,9 +181,20 @@ namespace game
 			}
 		}
 
+		void DeactivePower(int index)
+		{
+			if (power[index].isActive)
+				power[index].isActive = false;
+		}
+
 		Asteroid& GetAsteroid(int index)
 		{
 			return asteroids[index];
+		}
+
+		PowerUp& GetPowers(int index)
+		{
+			return power[index];
 		}
 
 		void SpawnAsteroid(Vector2 position, AsteroidType type)
@@ -182,6 +222,64 @@ namespace game
 
 					return;
 				}
+			}
+		}
+
+
+		void ActivePower()
+		{
+			for (int i = 0; i < maxPowers; i++)
+			{
+				if (!power[i].isActive)
+				{
+					float x = 0;
+					float y = 0;
+
+					Vector2 randTarget;
+
+					switch (GetRandomValue(1, 4))
+					{
+					case 1:
+						x = static_cast<float>(GetRandomValue(0, GetScreenWidth()));
+						y = static_cast<float>(-power[i].graph.dest.height);
+						break;
+
+					case 2:
+						x = static_cast<float>(-power[i].graph.dest.width);
+						y = static_cast<float>(GetRandomValue(0, GetScreenHeight()));
+						break;
+
+					case 3:
+						x = static_cast<float>(GetRandomValue(0, GetScreenWidth()));
+						y = static_cast<float>(GetScreenHeight() + power[i].graph.dest.height);
+						break;
+
+					case 4:
+						x = static_cast<float>(GetScreenWidth() + power[i].graph.dest.width);
+						y = static_cast<float>(GetRandomValue(0, GetScreenHeight()));
+						break;
+					}
+
+					power[i].graph.dest.x = x;
+					power[i].graph.dest.y = y;
+
+					randTarget.x = static_cast<float>(GetRandomValue(0, GetScreenWidth()));
+					randTarget.y = static_cast<float>(GetRandomValue(0, GetScreenHeight()));
+
+					SetTarget(power[i], randTarget);
+
+					power[i].isActive = true;
+
+					return;
+				}
+			}
+		}
+
+		void CreatePowerUp()
+		{
+			for (int i = 0; i < maxPowers; i++)
+			{
+				power[i] = powerup::Create("PowerUp", Rectangle{0,0,32,32}, Vector2{0,0});
 			}
 		}
 	}

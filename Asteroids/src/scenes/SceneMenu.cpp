@@ -9,6 +9,7 @@
 #include "managers/GameManager.h"
 
 #include "ui/Button.h"
+#include "ui/Panel.h"
 
 using namespace game::resolutionmanager;
 
@@ -25,17 +26,21 @@ namespace game
 			Button buttons[maxButtonsPMenu];
 			std::string bNames[maxButtonsPMenu];
 
+			panel::Panel panel;
+
 			text::Text hightScore;
 
 			void Init()
 			{
 				soundmanager::PlayM("MenuM");
 
-				hightScore = text::Create("High Score        ", (GetScreenWidth() / 2), 30, 20, WHITE);
+				hightScore = text::Create("High Score        ", (GetScreenWidth() / 2), 160, 20, WHITE);
 
-				float offset = (ButtonHeight * 2.f) * GetScale().y;
+				panel = panel::Create("Title", Rectangle{ static_cast<float>(GetScreenWidth() / 2),60,240,120 }, "");
+
+				float offset = (ButtonHeight * 1.5f) * GetScale().y;
 				float posx = currentWidth / 2.f;
-				float posy = offset;
+				float posy = offset + ((ButtonHeight * 1.5f) * GetScale().y);
 
 				bNames[0] = "Play";
 				bNames[1] = "Options";
@@ -79,6 +84,8 @@ namespace game
 
 				if (gamemanager::GetMaxScore() > 0)
 					text::Draw(hightScore);
+
+				panel::Draw(panel);
 			}
 
 			void DeInit()

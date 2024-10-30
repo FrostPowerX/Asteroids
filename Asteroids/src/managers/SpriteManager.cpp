@@ -52,6 +52,7 @@ namespace game
 			AddSprite("LinkButton", "res/Sprites/LinkButton.png", false);
 			AddSprite("CheckButton", "res/Sprites/CheckButton.png", false);
 			AddSprite("Controls", "res/Controls.png", false);
+			AddSprite("Title", "res/Title.png", false);
 		}
 
 		void UnloadSprites()

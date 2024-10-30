@@ -10,6 +10,7 @@
 #include "managers/AsteroidsManager.h"
 #include "managers/GameManager.h"
 #include "managers/ResolutionManager.h"
+#include "managers/SoundManager.h"
 
 #include "ui/Button.h"
 #include "ui/Panel.h"
@@ -24,6 +25,7 @@ namespace game
 	using namespace button;
 	using namespace panel;
 	using namespace resolutionmanager;
+	using namespace soundmanager;
 
 	namespace scenes
 	{
@@ -31,17 +33,20 @@ namespace game
 		{
 			const int maxButtonsPMenu = 3;
 			const int maxButtonsEMenu = 2;
+			const int maxButtonsPoMenu = 4;
 
 			SpaceShip player;
 
 			Button buttonsPMenu[maxButtonsPMenu];
 			Button buttonsEMenu[maxButtonsEMenu];
+			Button buttonsPoMenu[maxButtonsPoMenu];
 
 			Panel playerHealth;
 			Panel score;
 
 			bool endMenu;
 			bool pauseMenu;
+			bool powerMenu;
 
 			void InitButtons();
 			void InitPanels();
@@ -69,11 +74,8 @@ namespace game
 
 			void Input()
 			{
-				if (input::GetKeyPressed("Back") && !endMenu)
+				if (input::GetKeyPressed("Back") && !endMenu && !powerMenu)
 					pauseMenu = !pauseMenu;
-
-				if (input::GetKeyDown("TripleShoot"))
-					player.tripleShoot = !player.tripleShoot;
 
 				if (pauseMenu)
 					for (int i = 0; i < maxButtonsPMenu; i++)
@@ -91,6 +93,8 @@ namespace game
 								break;
 
 							case 2:
+								soundmanager::StopM("GamePlayM");
+								soundmanager::PlayM("MenuM");
 								ResetScore();
 								currentScene = SCENE::MENU;
 								break;
@@ -114,11 +118,44 @@ namespace game
 								break;
 							}
 					}
+
+				if (powerMenu)
+				{
+					for (int i = 0; i < maxButtonsPoMenu; i++)
+					{
+						if (IsPressed(buttonsPoMenu[i]))
+							switch (i)
+							{
+							case 0:
+								powerMenu = false;
+								for (int j = 0; j < maxBullets; j++)
+								{
+									player.bullets[j].speed += 10;
+								}
+								break;
+
+							case 1:
+								powerMenu = false;
+								player.resetTime -= (player.resetTime > 0) ? 0.02f : player.resetTime;
+								break;
+
+							case 2:
+								powerMenu = false;
+								player.lives++;
+								break;
+
+							case 3:
+								powerMenu = false;
+								player.tripleShoot = !player.tripleShoot;
+								break;
+							}
+					}
+				}
 			}
 
 			void Update()
 			{
-				if (!pauseMenu && !endMenu)
+				if (!pauseMenu && !endMenu && !powerMenu)
 				{
 					Update(player);
 
@@ -128,7 +165,10 @@ namespace game
 					MapCollisions();
 
 					if (player.lives <= 0)
+					{
+						PlayS("Lose");
 						endMenu = !endMenu;
+					}
 				}
 
 				if (pauseMenu)
@@ -141,6 +181,12 @@ namespace game
 				{
 					for (int i = 0; i < maxButtonsEMenu; i++)
 						MouseOnTop(buttonsEMenu[i]);
+				}
+
+				if (powerMenu)
+				{
+					for (int i = 0; i < maxButtonsPoMenu; i++)
+						MouseOnTop(buttonsPoMenu[i]);
 				}
 			}
 
@@ -179,6 +225,14 @@ namespace game
 					for (int i = 0; i < maxButtonsEMenu; i++)
 						Draw(buttonsEMenu[i]);
 				}
+
+				if (powerMenu)
+				{
+					DrawRectangle(0, 0, currentWidth, currentHeight, Color{ 0,0,0,100 });
+
+					for (int i = 0; i < maxButtonsPoMenu; i++)
+						Draw(buttonsPoMenu[i]);
+				}
 			}
 
 			void DeInit()
@@ -192,7 +246,7 @@ namespace game
 				float posx = currentWidth / 2.f;
 				float posy = offset;
 
-				std::string buttonsName[maxButtonsPMenu];
+				std::string buttonsName[10];
 
 				buttonsName[0] = "Resume";
 				buttonsName[1] = "Restart";
@@ -213,6 +267,20 @@ namespace game
 				for (int i = 0; i < maxButtonsEMenu; i++)
 				{
 					buttonsEMenu[i] = button::Create("Button", Rectangle{ posx, posy, ButtonWidth, ButtonHeight }, buttonsName[i]);
+
+					posy += offset;
+				}
+
+				posy = offset;
+
+				buttonsName[0] = "Bullet Speed";
+				buttonsName[1] = "Shoot Ratio";
+				buttonsName[2] = "Live";
+				buttonsName[3] = "Special";
+
+				for (int i = 0; i < maxButtonsPoMenu; i++)
+				{
+					buttonsPoMenu[i] = button::Create("Button", Rectangle{ posx, posy, ButtonWidth, ButtonHeight }, buttonsName[i]);
 
 					posy += offset;
 				}
@@ -254,6 +322,17 @@ namespace game
 					}
 				}
 
+				for (int i = 0; i < maxPowers; i++)
+				{
+					if (player.isAlive && GetPowers(i).isActive)
+						if (CheckCollision(player.body, GetPowers(i).graph.dest))
+						{
+							PlayS("PickUp");
+							DeactivePower(i);
+							powerMenu = true;
+						}
+				}
+
 				for (int i = 0; i < maxBullets; i++) // Bullets to Asteroids Collisions
 				{
 					for (int j = 0; j < maxAsteroids; j++)
@@ -261,6 +340,7 @@ namespace game
 						if (GetBullet(player, i).isAlive && GetAsteroid(j).isAlive)
 							if (CheckCollision(GetBullet(player, i).body, GetAsteroid(j).body))
 							{
+								PlayS("Dmg");
 								SolveCollision(GetBullet(player, i).body, GetAsteroid(j).body);
 								DeactiveAsteroid(j);
 								bullet::OnCollision(GetBullet(player, i));
@@ -269,15 +349,16 @@ namespace game
 					}
 				}
 			}
+
 			void MapCollisions()
 			{
-				if (CheckBorderCollision(player.body, currentWidth + player.body.radius, 0, currentHeight + player.body.radius, 0))
+				if (CheckBorderCollision(player.body, static_cast<int>(currentWidth + player.body.radius), 0, static_cast<int>(currentHeight + player.body.radius), 0))
 				{
-					int minWidth = -player.body.radius;
-					int minHeight = -player.body.radius;
+					float minWidth = -player.body.radius;
+					float minHeight = -player.body.radius;
 
-					int maxWidth = currentWidth + player.body.radius;
-					int maxHeight = currentHeight + player.body.radius;
+					int maxWidth = static_cast<int>(currentWidth + player.body.radius);
+					int maxHeight = static_cast<int>(currentHeight + player.body.radius);
 
 					if (player.body.x > maxWidth && player.body.y < maxHeight)
 						player.body.x -= maxWidth;
@@ -297,13 +378,13 @@ namespace game
 					if (!ast.isAlive)
 						continue;
 
-					int minWidth = -ast.body.radius;
-					int minHeight = -ast.body.radius;
+					float minWidth = -ast.body.radius;
+					float minHeight = -ast.body.radius;
 
-					int maxWidth = currentWidth + ast.body.radius;
-					int maxHeight = currentHeight + ast.body.radius;
+					int maxWidth = static_cast<int>(currentWidth + ast.body.radius);
+					int maxHeight = static_cast<int>(currentHeight + ast.body.radius);
 
-					if (CheckBorderCollision(ast.body, maxWidth, minWidth, maxHeight, minHeight))
+					if (CheckBorderCollision(ast.body, maxWidth, static_cast<int>(minWidth), maxHeight, static_cast<int>(minHeight)))
 					{
 						if (ast.body.x > maxWidth && ast.body.y < maxHeight)
 							ast.body.x -= maxWidth;
@@ -317,6 +398,33 @@ namespace game
 					}
 				}
 
+				for (int i = 0; i < maxPowers; i++)
+				{
+					PowerUp& power = GetPowers(i);
+
+					if (!power.isActive)
+						continue;
+
+					float minWidth = -power.graph.dest.width;
+					float minHeight = -power.graph.dest.height;
+
+					int maxWidth = static_cast<int>(currentWidth + power.graph.dest.width);
+					int maxHeight = static_cast<int>(currentHeight + power.graph.dest.height);
+
+					if (CheckBorderCollision(power.graph.dest, maxWidth, static_cast<int>(minWidth), maxHeight, static_cast<int>(minHeight)))
+					{
+						if (power.graph.dest.x > maxWidth && power.graph.dest.y < maxHeight)
+							power.graph.dest.x -= maxWidth;
+						else if (power.graph.dest.x < minWidth && power.graph.dest.y > minHeight)
+							power.graph.dest.x += maxWidth;
+
+						if (power.graph.dest.x < maxWidth && power.graph.dest.y > maxHeight)
+							power.graph.dest.y -= maxHeight;
+						else if (power.graph.dest.x > minWidth && power.graph.dest.y < minHeight)
+							power.graph.dest.y += maxHeight;
+					}
+				}
+
 				for (int i = 0; i < maxBullets; i++)
 				{
 					bullet::Bullet& bullet = player.bullets[i];
@@ -324,13 +432,13 @@ namespace game
 					if (!bullet.isAlive)
 						continue;
 
-					int minWidth = -bullet.body.radius;
-					int minHeight = -bullet.body.radius;
+					float minWidth = -bullet.body.radius;
+					float minHeight = -bullet.body.radius;
 
-					int maxWidth = currentWidth + bullet.body.radius;
-					int maxHeight = currentHeight + bullet.body.radius;
+					int maxWidth = static_cast<int>(currentWidth + bullet.body.radius);
+					int maxHeight = static_cast<int>(currentHeight + bullet.body.radius);
 
-					if (CheckBorderCollision(bullet.body, maxWidth, minWidth, maxHeight, minHeight))
+					if (CheckBorderCollision(bullet.body, maxWidth, static_cast<int>(minWidth), maxHeight, static_cast<int>(minHeight)))
 					{
 						if (bullet.body.x > maxWidth && bullet.body.y < maxHeight)
 							bullet.body.x -= maxWidth;
